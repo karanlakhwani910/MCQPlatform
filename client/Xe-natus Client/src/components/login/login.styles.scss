@@ -1,0 +1,30 @@
+.login {
+  width: 60%;
+  margin: 9% auto;
+  padding: 3%;
+  background-color: #b7a4fa3f;
+  border-radius: 2%;
+}
+.login button {
+  background-color: #15152d;
+  transform: scale(1.1);
+  border: none;
+}
+
+.login button:hover {
+  background-color: #15152d;
+
+  transform: scale(1.15);
+}
+
+.login img {
+  margin: 10% 10% 0%;
+}
+// .login h2{
+//     margin-bottom: 4%;
+// }
+@media screen and(max-width:500px) {
+  .login {
+    width: 90%;
+  }
+}

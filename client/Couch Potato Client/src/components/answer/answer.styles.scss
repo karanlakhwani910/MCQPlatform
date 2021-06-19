@@ -1,0 +1,53 @@
+@font-face {
+  font-family: Fenix;
+  src: url(Fenix-Regular.ttf);
+}
+.answer {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+}
+.styling {
+  width: 500%;
+  //color: cyan;
+  text-align: justify;
+  font-family: "Times New Roman bold", Times, serif;
+  margin-left: 10%;
+  font-size: 50px;
+}
+.MuiGrid-spacing-xs-1 > .MuiGrid-item {
+  padding: 4px;
+  margin-left: 40px;
+  // margin: auto;
+}
+.buttonStyleSnapHunt {
+  // width: 500%;
+  margin-left: 30%;
+  border: none;
+  font-size: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+#custom-button {
+  padding: 10px;
+  color: white;
+  background-color: #009578;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#custom-button:hover {
+  background-color: #00b28f;
+}
+
+#custom-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+
+@media only screen and (min-width: 600px) {
+  .MuiFormControlLabel-label {
+    font-size: 50px;
+  }
+}

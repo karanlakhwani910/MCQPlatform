@@ -1,0 +1,18 @@
+.intruction-div {
+  margin: 9% auto;
+  width: 70%;
+  background-color: #b7a4fa3f;
+  padding: 3%;
+  border-radius: 10px;
+  font-family: Fenix;
+}
+.intruction-div p {
+  margin: 5%;
+  text-align: left;
+  font-size: 130%;
+}
+@media screen and(max-width:500px) {
+  .intruction-div {
+    width: 90%;
+  }
+}

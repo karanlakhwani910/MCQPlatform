@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cantarell&display=swap");
+
+.body {
+  overflow: hidden;
+}
+.row {
+  // display: inline-block;
+  // padding: 50px;
+  margin: 10px;
+}
+
+.button-row {
+  margin: auto;
+  padding: 10%;
+}
+
+.container-fluid1 {
+  overflow-x: hidden;
+  background-image: none;
+  background-color: #282c34;
+  position: relative;
+
+  padding-right: 0;
+  padding-left: 0;
+  color: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+.overlay1 {
+  background-color: rgba(0, 0, 0, 0.43);
+  height: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  // padding-top: 10px;
+  //padding-bottom: 100px;
+  margin: auto;
+  display: inline-block;
+}
+
+.heading {
+  color: cyan;
+  font-weight: bolder;
+  font-family: Fenix;
+}
+.thankyouStyling {
+  margin: 8% 20%;
+  font-family: Fenix, "Cantarell", sans-serif;
+  font-weight: bolder;
+}
+.subheading {
+  font-family: Fenix, "Courgette", cursive;
+  margin: 10% 40%;
+  color: #faf3f3; //#022e57;
+  font-size: 40px;
+}

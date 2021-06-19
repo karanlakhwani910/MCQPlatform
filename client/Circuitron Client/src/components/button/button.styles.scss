@@ -1,0 +1,58 @@
+.button {
+  background-color:cyan;
+  
+  text-align: center;
+  font-size: 95%;
+  font-weight: bold;
+  color:black;
+  height: 7.75vh;
+  width: 12%;
+  box-shadow: 1px 1px 2px black, 0 0 20px cyan, 0 0 4px darkblue;
+
+  margin-left: 18.5%;
+  border-radius: 2%;
+}
+@media (max-width: 900px) {
+  .button {
+    background-color:cyan;
+    
+    text-align: center;
+    font-size: 70%;
+    font-weight: bold;
+    color:black;
+    height: 7vh;
+    width: 12%;
+    box-shadow: 1px 1px 2px black, 0 0 20px cyan, 0 0 4px darkblue;
+  
+    margin-left: 10.5%;
+    border-radius: 2%;
+  }
+}
+.button:hover {
+  background-color:black;
+  text-align: center;
+  font-size: 95%;
+  font-weight: bold;
+  color:cyan;
+  height: 7.75vh;
+  width: 12%;
+  
+
+  margin-left: 18.5%;
+  border-radius: 2%;
+}
+@media (max-width: 900px) {
+  .button:hover {
+    background-color:black;
+    text-align: center;
+    font-size: 70%;
+    font-weight: bold;
+    color:cyan;
+    height: 7vh;
+    width: 12%;
+    
+  
+    margin-left: 10.5%;
+    border-radius: 2%;
+  }
+}

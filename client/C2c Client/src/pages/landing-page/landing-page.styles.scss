@@ -1,0 +1,76 @@
+.nav-bar {
+  background-color: #6b68be;
+}
+.Xenia21Logo1 {
+  margin-top: -10%;
+  margin-bottom: -5%;
+  width: 280px;
+  height: 150px;
+}
+.circuitron1 {
+  height: 200px;
+  width: 200px;
+  margin-bottom: -8%;
+}
+.campustocorporate {
+  margin-top: 0;
+  height: 100px;
+  width: 120px;
+}
+.xenatus {
+  width: 200px;
+  height: 150px;
+  margin-bottom: -8%;
+  margin-top: 0%;
+}
+.couchpotato {
+  width: 250px;
+  height: 150px;
+  margin-bottom: -10%;
+}
+@media only screen and (min-width: 600px) {
+  .Xenia21Logo1 {
+    margin-top: -2%;
+    width: 280px;
+    height: 150px;
+  }
+  .circuitron1 {
+    height: 220px;
+  }
+  .campustocorporate {
+    margin-top: 0;
+    height: 100px;
+    width: 150px;
+  }
+  .xenatus {
+    width: 200px;
+    height: 200px;
+    margin-bottom: -10%;
+  }
+
+  .couchpotato {
+    width: 250px;
+    height: 200px;
+    margin-bottom: -8%;
+    margin-top: -3%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .Xenia21Logo1 {
+    margin-bottom: -10%;
+  }
+  .circuitron1 {
+    margin-bottom: -20%;
+  }
+  .couchpotato {
+    height: 200px;
+    width: 250px;
+    margin-bottom: -20%;
+  }
+  .xenatus {
+    width: 200px;
+    height: 200px;
+    margin-bottom: -25%;
+    margin-top: -10%;
+  }
+}
