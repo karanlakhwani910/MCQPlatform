@@ -1,0 +1,46 @@
+.body {
+  overflow: hidden;
+}
+.row {
+  // display: inline-block;
+  // padding: 50px;
+  margin: 10px;
+}
+
+.button-row {
+  margin: auto;
+  padding: 10%;
+}
+
+.container-fluid {
+  overflow-x: hidden;
+  background-image: url("../../STAR3_dark.png");
+  position: relative;
+
+  padding-right: 0;
+  padding-left: 0;
+  color: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+.overlay1 {
+  background-color: rgba(0, 0, 0, 0.43);
+  height: auto;
+  width: 100%;
+  height: 100;
+  top: 0;
+  left: 0;
+  // padding-top: 10px;
+  //padding-bottom: 100px;
+  margin: auto;
+  display: inline-block;
+}
+
+.heading {
+  color: cyan;
+  font-weight: bolder;
+  font-family: serif;
+}
