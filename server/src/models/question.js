@@ -3,12 +3,10 @@ var randomGenerator = require("mongoose-simple-random");
 
 const questionSchema = new mongoose.Schema(
   {
-    answers: [
-      {
-        id: String,
-        text: String,
-      },
-    ],
+    answers: {
+        type: [String],
+    }
+    ,
     content: {
       type: String,
       required: true,

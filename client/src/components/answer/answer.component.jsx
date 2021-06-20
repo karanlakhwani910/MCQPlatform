@@ -55,24 +55,24 @@ const RadioButtonsGroup = function ({
           <FormControlLabel
             value="0"
             control={<StyledRadio />}
-            label={answers[0].text}
+            label={answers[0]}
             // label="Random Option Opp tion oOO ppp Random Option Opp tion oOO ppp Option Opp tion oOO ppp Option Opp tion oOO ppp Option Opp tion oOO ppp Option Opp tion oOO ppp"
             className="FormControlLabelStyling"
           />
           <FormControlLabel
             value="1"
             control={<StyledRadio />}
-            label={answers[1].text}
+            label={answers[1]}
           />
           <FormControlLabel
             value="2"
             control={<StyledRadio />}
-            label={answers[2].text}
+            label={answers[2]}
           />
           <FormControlLabel
             value="3"
             control={<StyledRadio />}
-            label={answers[3].text}
+            label={answers[3]}
           />
         </RadioGroup>
       </FormControl>
