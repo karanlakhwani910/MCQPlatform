@@ -17,7 +17,7 @@ function App() {
         <Route exact={true} path="/couchPotato/quiz/:authToken" component={QuizPage} />
         <Route exact={true} path="/xenatus/quiz/:authToken" component={QuizPage} />
         <Route exact={true} path="//quiz/:authToken" component={QuizPage} /> */}
-        <Route exact={true} path="/quiz/:authToken/" component={QuizPage} />
+        <Route exact={true} path="/:event/quiz/:authToken/" component={QuizPage} />
         <Route exact={true} path="/thankyou/#!" component={ThankyouPage} />
         {/* <Route exact={false} path="/loader" component={Loader} /> */}
       </Switch>

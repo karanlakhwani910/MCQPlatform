@@ -40,9 +40,7 @@ const Login = ({ history }) => {
         console.log(res.data);
         if (res.data.status === "Success") {
           setSeverity("success");
-          console.log(severity);
           setMessage(res.data.message);
-          console.log(message);
           handleClick();
           var link = "/quiz/" + res.data.currentToken +"/";
           console.log(link);
