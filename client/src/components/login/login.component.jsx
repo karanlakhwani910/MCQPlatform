@@ -9,6 +9,11 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,6 +25,17 @@ const useStyles = makeStyles((theme) => ({
     "& > * + *": {
       marginTop: theme.spacing(2),
     },
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+    color: "black",
+  },
+  required1: {
+    color: "white",
   },
 }));
 
@@ -42,7 +58,7 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          var link = "/quiz/" + res.data.currentToken +"/";
+          var link = "/quiz/" + res.data.currentToken + "/";
           console.log(link);
           setTimeout(() => history.push(link), 2000);
         }
@@ -70,6 +86,11 @@ const Login = ({ history }) => {
 
     setOpen(false);
   };
+  const [eventname, setEventname] = React.useState("");
+
+  const handleChange = (event) => {
+    setEventname(event.target.value);
+  };
 
   return (
     <div className="login">
@@ -91,6 +112,31 @@ const Login = ({ history }) => {
             placeholder="Password"
           />
         </Form.Group>
+        <div>
+          <FormControl required className={classes.formControl}>
+            <InputLabel id="demo-simple-select-required-label">
+              Event-Name
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-required-label"
+              id="demo-simple-select-required"
+              value={eventname}
+              onChange={handleChange}
+              className={classes.selectEmpty}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Couch Potato</MenuItem>
+              <MenuItem value={20}>Campus-To-Corporate</MenuItem>
+              <MenuItem value={30}>XeNatus</MenuItem>
+              <MenuItem value={40}>Circuitron</MenuItem>
+            </Select>
+            <FormHelperText className={classes.required1}>
+              Required
+            </FormHelperText>
+          </FormControl>
+        </div>
         <Button
           variant="dark"
           size="md"
