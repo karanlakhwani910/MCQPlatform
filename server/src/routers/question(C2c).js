@@ -64,8 +64,20 @@ router.post("/fetchQuestions", async (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(results);
-        res.status(200).send(results);
+        var newresults=results.map((question)=>{
+          bcrypt.genSalt(10,(err, salt) => {
+            bcrypt.hash(question.correctAnswer.toString(), salt,(err, hash) => {
+              if (err) throw err;
+              question = {...question,correctAnswer:hash};
+              console.log("question after setting is",question)
+              console.log(hash);
+            });
+          });
+          return question;
+        })
+        console.log(newresults);
+        
+        res.status(200).send(newresults);
       }
     });
   } catch (e) {

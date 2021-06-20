@@ -1,0 +1,33 @@
+@font-face {
+  font-family: digital;
+  src: url(digital.ttf);
+}
+.timer {
+  font-family: digital;
+  background-color: transparent;
+  border-radius: 40px;
+  border: 8px solid cyan;
+  box-shadow: 1px 1px 2px black, 0 0 25px cyan, 0 0 5px darkblue;
+  border-radius: 40px;
+  text-align: center;
+  color: cyan;
+  // height: 10%;
+  // width: 17%;
+  margin-top: -15%;
+
+  width: fit-content;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+// .row {
+//   display: inline-block;
+// }
+// .timer:hover {
+//   color: #255784;
+//   background: cyan;
+//   box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 10px #2196f3;
+
+//   // height: 10%;
+//   // width: 17%;
+//   // margin-left: 87%;
+// }
