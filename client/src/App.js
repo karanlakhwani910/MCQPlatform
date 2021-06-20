@@ -23,8 +23,8 @@ function App() {
         <Route exact={true} path="//quiz/:authToken" component={QuizPage} /> */}
         <Route
           exact={true}
-          path="/:event/quiz/:authToken/"
-          component={QuizPage}
+          path="/quiz/:authToken/"
+          component={QuizPageXenatus}
         />
         <Route exact={true} path="/thankyou/#!" component={ThankyouPage} />
         {/* <Route exact={false} path="/loader" component={Loader} /> */}
