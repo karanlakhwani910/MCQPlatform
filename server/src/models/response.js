@@ -4,12 +4,9 @@ const responseSchema = new mongoose.Schema(
   {
     questions: [
       {
-        answers: [
-          {
-            id: String,
-            text: String,
-          },
-        ],
+        answers: {
+          type: [String],
+        },
         content: {
           type: String,
           required: true,
