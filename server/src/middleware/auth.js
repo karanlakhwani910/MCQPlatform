@@ -14,7 +14,8 @@ try {
     const decoded = jwt.verify(token,"mcqPlatform",async function(err,decoded){
         if(err)
         {
-            res.json({status:"Error",msg:"Token is not valid"})
+            console.log("Token timed out")
+            res.json({status:"Failure",msg:"Token is not valid"})
         }
         else
         {
@@ -26,6 +27,6 @@ try {
         });
    
 } catch (err) {
-    res.status(401).json({ msg: 'Token is not valid',status:"Error"});
+    res.status(401).json({ msg: 'Token is not valid',status:"Failure"});
 }
 }
