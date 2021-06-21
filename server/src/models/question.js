@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 var randomGenerator = require("mongoose-simple-random");
+var conn=require("../db/mongoose");
 
 const questionSchema = new mongoose.Schema(
   {
@@ -29,6 +30,10 @@ const questionSchema = new mongoose.Schema(
       required: true,
       default: 10,
     },
+    image:{
+      type:String,
+      required:false
+    }
     // avatar:{
     //     type:Buffer
     // }
@@ -44,6 +49,10 @@ const questionSchema = new mongoose.Schema(
 
 questionSchema.plugin(randomGenerator);
 
-const Question = mongoose.model("Question", questionSchema);
+const couchPotatoQuestion = mongoose.model("Question", questionSchema);
+const circuitronQuestion=conn.circuitron.model("Question",questionSchema);
+const xenatusQuestion=conn.xenatus.model("Question",questionSchema);
+const c2cQuestion=conn.c2c.model("Question",questionSchema);
 
-module.exports = Question;
+
+module.exports = {couchPotatoQuestion,circuitronQuestion,xenatusQuestion,c2cQuestion};

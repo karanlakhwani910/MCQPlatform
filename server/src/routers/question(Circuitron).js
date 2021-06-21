@@ -1,14 +1,23 @@
 const express = require("express");
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
+const mongodb=require("mongodb");
 
 const auth = require("../middleware/auth");
-const Question = require("../models/question");
-const Response = require("../models/response");
-const User = require("../models/user");
+const {circuitronQuestion} = require("../models/question");
+const {circuitronResponse} = require("../models/response");
+const {circuitronUser} = require("../models/user");
 
 const router = new express.Router();
 
+mongodb.connect(
+  "mongodb+srv://couch_potato_user:couch_potato_user@couch-potato.g9qjz.mongodb.net/Circuitron",
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  function (err, client) {
+    db = client.db()
+    console.log("connected to db")
+  }
+)
 // router.post("/createQuestion", async (req, res) => {
 //   try {
 //     const question = new Question(req.body);
@@ -60,7 +69,7 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    Question.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    circuitronQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -95,9 +104,10 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
         }
       }
     });
-    const response = new Response({ questions: req.body, owner: req.user._id });
-    const user = await User.findOneAndUpdate(
-      { _id: req.user._id },
+
+    const response = new circuitronResponse({ questions: req.body, owner: req._id });
+    const user = await circuitronUser.findOneAndUpdate(
+      { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
     console.log(user);
@@ -160,10 +170,22 @@ router.post("/login", async (req, res) => {
     
     
 
-    const user = await User.findByCredentials(
-      req.body.username,
-      req.body.password
-    );
+    
+    // const user=await circuitronUser.findOne({username:req.body.username})
+    console.log("username in end point is",req.body.username)
+    const user=db.find({email:req.body.username}).toArray(function (err, items) {
+    })[0]
+
+    console.log(user);
+    if(!user){
+        throw new Error('Unable to login')
+    }
+
+    const isMatch=await bcrypt.compare(req.body.password,user.password)
+
+    if(!isMatch){
+        throw new Error("Unable to login")
+    }   
     const token = await user.generateAuthToken();
     await user.save();
     res.json({

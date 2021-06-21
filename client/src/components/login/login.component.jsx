@@ -49,7 +49,7 @@ const Login = ({ history }) => {
   var [message, setMessage] = React.useState(""); //change message
   const onClickFunction = () => {
     axios
-      .post(`http://localhost:3001/${eventRef.current.value}/login`, {
+      .post(`http://localhost:3001/circuitron/login`, {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       })
@@ -59,7 +59,7 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          var link = "/quiz/" + res.data.currentToken + "/";
+          var link = "/"+"circuitron"+"/quiz/" + res.data.currentToken + "/";
           console.log(link);
           setTimeout(() => history.push(link), 2000);
         }

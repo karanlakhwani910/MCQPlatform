@@ -2,6 +2,7 @@ const mongoose=require('mongoose')
 const validator=require('validator')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+var conn=require("../db/mongoose");
 
 
 const userSchema=new mongoose.Schema({
@@ -75,21 +76,21 @@ userSchema.virtual('responses',{
 // }
 
 
-userSchema.statics.findByCredentials=async(username,password)=>{
-    const user=await User.findOne({username})
-    console.log(user);
-    if(!user){
-        throw new Error('Unable to login')
-    }
+// userSchema.statics.findByCredentials=async(username,password)=>{
+//     const user=await User.findOne({username})
+//     console.log(user);
+//     if(!user){
+//         throw new Error('Unable to login')
+//     }
 
-    const isMatch=await bcrypt.compare(password,user.password)
+//     const isMatch=await bcrypt.compare(password,user.password)
 
-    if(!isMatch){
-        throw new Error("Unable to login")
-    }   
+//     if(!isMatch){
+//         throw new Error("Unable to login")
+//     }   
     
-    return user
-}
+//     return user
+// }
 
 
 
@@ -119,9 +120,12 @@ userSchema.methods.generateAuthToken=async function(){
 // })
 
 
-const User=mongoose.model('User',userSchema)
+const couchPotatoUser = mongoose.model("User", userSchema);
+const circuitronUser=conn.circuitron.model("User",userSchema);
+const xenatusUser=conn.xenatus.model("User",userSchema);
+const c2cUser=conn.c2c.model("User",userSchema);
 
-module.exports=User
+module.exports={couchPotatoUser,circuitronUser,xenatusUser}
 
 
 // List of mcqs 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var conn=require("../db/mongoose");
 
 const responseSchema = new mongoose.Schema(
   {
@@ -15,6 +16,10 @@ const responseSchema = new mongoose.Schema(
           type: Boolean,
           required: true,
           default: false,
+        },
+        image:{
+          type:String,
+          required:false
         },
         selectedAnswer: {
           type: Number,
@@ -43,6 +48,9 @@ const responseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Response = mongoose.model("Response", responseSchema);
+const couchPotatoResponse = mongoose.model("Response", responseSchema);
+const circuitronResponse=conn.circuitron.model("Response",responseSchema);
+const xenatusResponse=conn.xenatus.model("Response",responseSchema);
+const c2cResponse=conn.c2c.model("Response",responseSchema)
 
-module.exports = Response;
+module.exports = {couchPotatoResponse,circuitronResponse,xenatusResponse,c2cResponse};

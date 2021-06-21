@@ -3,9 +3,9 @@ const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
 
 const auth = require("../middleware/auth");
-const Question = require("../models/question");
-const Response = require("../models/response");
-const User = require("../models/user");
+const {xenatusQuestion} = require("../models/question");
+const {xenatusResponse} = require("../models/response");
+const {xenatusUser} = require("../models/user");
 
 const router = new express.Router();
 
@@ -60,7 +60,7 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    Question.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    xenatusQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -95,9 +95,9 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
         }
       }
     });
-    const response = new Response({ questions: req.body, owner: req.user._id });
-    const user = await User.findOneAndUpdate(
-      { _id: req.user._id },
+    const response = new xenatusResponse({ questions: req.body, owner: req._id });
+    const user = await xenatusUser.findOneAndUpdate(
+      { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
     console.log(user);
@@ -160,7 +160,7 @@ router.post("/login", async (req, res) => {
     
     
 
-    const user = await User.findByCredentials(
+    const user = await xenatusUser.findByCredentials(
       req.body.username,
       req.body.password
     );
