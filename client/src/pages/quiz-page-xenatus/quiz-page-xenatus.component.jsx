@@ -234,14 +234,15 @@ const Wrapper = styled.section`
   .buttonStyle {
     
     margin-right: 10%;
-    background: #f11794;
+    
     border-radius:0;
     margin: 0 20px 0px -20px;
+    background: #15152D;
     &:hover {
       background: black;
-      border: 2px solid #f11794;
-      color: #f11794;
-      box-shadow: 1px 1px 2px black, 0 0 45px #f11794, 0 0 5px darkblue;
+      border: 2px solid #15152D;
+      color: #white;
+      box-shadow: 1px 1px 2px black, 0 0 45px #15152D, 0 0 5px darkblue;
     }
   }
   .container-fluid {
