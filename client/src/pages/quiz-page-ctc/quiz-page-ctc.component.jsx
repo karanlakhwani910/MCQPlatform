@@ -188,7 +188,9 @@ class QuizPageCTC extends Component {
                         variant="contained"
                         color="secondary"
                         className="buttonStyle"
-                        onClick={() => this.submit(this, this.props.questionsC2c)}
+                        onClick={() =>
+                          this.submit(this, this.props.questionsC2c)
+                        }
                       >
                         Submit
                       </Button>
@@ -284,9 +286,10 @@ const Wrapper = styled.section`
       
     }
     .EventNameLogo{
-      margin-top: -10%;
+      margin-top: -5%;
       margin-bottom: -20%;
-     
+      width:200px;
+      height:100px;
     }
     .row1 {
       margin-left:8%;
