@@ -1,11 +1,12 @@
 const express = require("express");
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
+const jwt=require("jsonwebtoken")
 
 const auth = require("../middleware/auth");
 const {xenatusQuestion} = require("../models/question");
 const {xenatusResponse} = require("../models/response");
-const {xenatusUser} = require("../models/user");
+const {xenatusMainSiteUser} = require("../models/main-site-user");
 
 const router = new express.Router();
 
@@ -140,7 +141,7 @@ router.post("/getTime/:authToken", auth, async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // console.log("In endpoint,username and password is",req.body);
-    // const user=new User(req.body);
+    // const user=new xenatusMainSiteUser({name:"kshitij deshpande",college:"pict",CA:"",phone:"9518535604",branch:"IT",year:"SE",event:"Xenatus",email:req.body.username,password:req.body.password});
     // bcrypt.genSalt(10,async (err, salt) => {
     //     bcrypt.hash(user.password, salt,async (err, hash) => {
     //       if (err) throw err;
@@ -160,12 +161,27 @@ router.post("/login", async (req, res) => {
     
     
 
-    const user = await xenatusUser.findByCredentials(
-      req.body.username,
-      req.body.password
-    );
-    const token = await user.generateAuthToken();
-    await user.save();
+    
+    // const user=await circuitronUser.findOne({username:req.body.username})
+
+    const user=await xenatusMainSiteUser.findOne({email:req.body.username})
+
+    console.log(user);
+    if(!user){
+        throw new Error('Unable to login')
+    }
+
+    const isMatch=await bcrypt.compare(req.body.password,user.password)
+
+    if(!isMatch){
+        throw new Error("Unable to login")
+    }
+    const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
+      expiresIn: '60m'
+   })
+    user.tokens=user.tokens.concat({token})
+    await user.save()
+
     res.json({
       status: "Success",
       user: user,
@@ -173,7 +189,7 @@ router.post("/login", async (req, res) => {
       message: "Successfully logged in!",
     });
     // res.json({status:"Success",user:user})
-  } catch (e) {
+    } catch (e) {
     console.log("Error:", e);
     res.json({ status: "Error", message: "Invalid Credentials" });
   }
