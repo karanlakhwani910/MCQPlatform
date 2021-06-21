@@ -21,7 +21,8 @@ try {
         {
             // console.log("decoded is..",decoded)
             console.log("authenticated")
-            req.user=await User.findOne({_id:decoded._id})
+            // req.user=await User.findOne({_id:decoded._id})
+            req._id=decoded._id;
             next();
         }
         });

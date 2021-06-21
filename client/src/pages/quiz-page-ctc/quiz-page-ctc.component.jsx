@@ -39,7 +39,7 @@ import Xenia21_Logo from "../../assets/Xenia21_Text.png";
 import { useEffect } from "react";
 // import circuitron from "../../assets/circuitron.png";
 // import coutchpotato from "../../assets/CouchPotato.png";
-import CampusToCorporate from "../../assets/CampustoCorporate.png";
+import CampusToCorporate from "../../assets/CampusToCorporate.png";
 // import xeNatus from "../../assets/xeNatus.png";
 
 class QuizPageCTC extends Component {

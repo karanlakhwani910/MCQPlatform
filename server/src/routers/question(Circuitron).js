@@ -1,14 +1,23 @@
 const express = require("express");
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
+const mongodb=require("mongodb");
 
 const auth = require("../middleware/auth");
-const Question = require("../models/question");
-const Response = require("../models/response");
-const User = require("../models/user");
+const {circuitronQuestion} = require("../models/question");
+const {circuitronResponse} = require("../models/response");
+const {circuitronUser} = require("../models/user");
 
 const router = new express.Router();
 
+mongodb.connect(
+  "mongodb+srv://couch_potato_user:couch_potato_user@couch-potato.g9qjz.mongodb.net/Circuitron",
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  function (err, client) {
+    db = client.db()
+    console.log("connected to db")
+  }
+)
 // router.post("/createQuestion", async (req, res) => {
 //   try {
 //     const question = new Question(req.body);
@@ -60,12 +69,17 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    Question.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    circuitronQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
-        console.log(results);
-        res.status(200).send(results);
+        var newresults=results.map((question)=>{
+            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                        return question;
+        })
+
+        
+        res.status(200).send(newresults);
       }
     });
   } catch (e) {
@@ -76,14 +90,13 @@ router.post("/fetchQuestions", async (req, res) => {
 // saveResponse stores the response of the user in the database
 router.post("/saveResponse/:authToken", auth, async (req, res) => {
   try {
-    console.log("body in endpoint is", req.body);
     const responsesArrray = req.body;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var score = 0;
     responsesArrray.map((question) => {
       if (question.marked === true) {
-        if (parseInt(question.selectedAnswer) === question.correctAnswer) {
+        if (parseInt(question.selectedAnswer) === (((question.correctAnswer**3)%33)-5)) {
           score += question.pointsForQuestion;
           correctAnswers++;
         } else {
@@ -91,9 +104,10 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
         }
       }
     });
-    const response = new Response({ questions: req.body, owner: req.user._id });
-    const user = await User.findOneAndUpdate(
-      { _id: req.user._id },
+
+    const response = new circuitronResponse({ questions: req.body, owner: req._id });
+    const user = await circuitronUser.findOneAndUpdate(
+      { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
     console.log(user);
@@ -147,10 +161,32 @@ router.post("/login", async (req, res) => {
     //     });
     //   });
     // await user.save();
-    const user = await User.findByCredentials(
-      req.body.username,
-      req.body.password
-    );
+    const date=new Date();
+    console.log("current date is",date);
+    const prevDate=new Date(2021, 5, 20, 8, 33, 30, 0);
+    console.log("prev date is",prevDate)
+    const nextDate=new Date(2021, 5, 20, 21, 33, 30, 0);
+    console.log("current compared to prev",prevDate<date,nextDate<date);
+    
+    
+
+    
+    const user=await circuitronUser.findOne({username:req.body.username})
+    // console.log("username in end point is",req.body.username);
+    // // var collection=db.collection
+    // // const user=db.find({email:req.body.username}).toArray(function (err, items) {
+    // // })[0]
+
+    // console.log(user);
+    if(!user){
+        throw new Error('Unable to login')
+    }
+
+    const isMatch=await bcrypt.compare(req.body.password,user.password)
+
+    if(!isMatch){
+        throw new Error("Unable to login")
+    }   
     const token = await user.generateAuthToken();
     await user.save();
     res.json({

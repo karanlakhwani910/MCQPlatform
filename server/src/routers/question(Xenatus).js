@@ -3,9 +3,9 @@ const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
 
 const auth = require("../middleware/auth");
-const Question = require("../models/question");
-const Response = require("../models/response");
-const User = require("../models/user");
+const {xenatusQuestion} = require("../models/question");
+const {xenatusResponse} = require("../models/response");
+const {xenatusUser} = require("../models/user");
 
 const router = new express.Router();
 
@@ -60,12 +60,17 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    Question.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    xenatusQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
-        console.log(results);
-        res.status(200).send(results);
+        var newresults=results.map((question)=>{
+            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                        return question;
+        })
+
+        
+        res.status(200).send(newresults);
       }
     });
   } catch (e) {
@@ -76,14 +81,13 @@ router.post("/fetchQuestions", async (req, res) => {
 // saveResponse stores the response of the user in the database
 router.post("/saveResponse/:authToken", auth, async (req, res) => {
   try {
-    console.log("body in endpoint is", req.body);
     const responsesArrray = req.body;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var score = 0;
     responsesArrray.map((question) => {
       if (question.marked === true) {
-        if (parseInt(question.selectedAnswer) === question.correctAnswer) {
+        if (parseInt(question.selectedAnswer) === (((question.correctAnswer**3)%33)-5)) {
           score += question.pointsForQuestion;
           correctAnswers++;
         } else {
@@ -91,9 +95,9 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
         }
       }
     });
-    const response = new Response({ questions: req.body, owner: req.user._id });
-    const user = await User.findOneAndUpdate(
-      { _id: req.user._id },
+    const response = new xenatusResponse({ questions: req.body, owner: req._id });
+    const user = await xenatusUser.findOneAndUpdate(
+      { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
     console.log(user);
@@ -147,7 +151,16 @@ router.post("/login", async (req, res) => {
     //     });
     //   });
     // await user.save();
-    const user = await User.findByCredentials(
+    const date=new Date();
+    console.log("current date is",date);
+    const prevDate=new Date(2021, 5, 20, 8, 33, 30, 0);
+    console.log("prev date is",prevDate)
+    const nextDate=new Date(2021, 5, 20, 21, 33, 30, 0);
+    console.log("current compared to prev",prevDate<date,nextDate<date);
+    
+    
+
+    const user = await xenatusUser.findByCredentials(
       req.body.username,
       req.body.password
     );

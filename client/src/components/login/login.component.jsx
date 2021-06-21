@@ -42,13 +42,14 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ history }) => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const eventRef=useRef(null);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   var [severity, setSeverity] = React.useState(""); //success,error,warning,info
   var [message, setMessage] = React.useState(""); //change message
   const onClickFunction = () => {
     axios
-      .post("http://localhost:3001/c2c/login", {
+      .post(`http://localhost:3001/circuitron/login`, {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       })
@@ -58,7 +59,7 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          var link = "/quiz/" + res.data.currentToken + "/";
+          var link = "/"+"circuitron"+"/quiz/" + res.data.currentToken + "/";
           console.log(link);
           setTimeout(() => history.push(link), 2000);
         }
@@ -120,6 +121,7 @@ const Login = ({ history }) => {
             <Select
               labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
+              ref={eventRef}
               value={eventname}
               onChange={handleChange}
               className={classes.selectEmpty}
@@ -127,10 +129,10 @@ const Login = ({ history }) => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Couch Potato</MenuItem>
-              <MenuItem value={20}>Campus-To-Corporate</MenuItem>
-              <MenuItem value={30}>XeNatus</MenuItem>
-              <MenuItem value={40}>Circuitron</MenuItem>
+              <MenuItem value={"couchPotato"}>Couch Potato</MenuItem>
+              <MenuItem value={"c2c"}>Campus-To-Corporate</MenuItem>
+              <MenuItem value={"xenatus"}>XeNatus</MenuItem>
+              <MenuItem value={"circuitron"}>Circuitron</MenuItem>
             </Select>
             <FormHelperText className={classes.required1}>
               Required
