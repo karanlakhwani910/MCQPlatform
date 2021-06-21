@@ -52,7 +52,7 @@ questionSchema.plugin(randomGenerator);
 const couchPotatoQuestion = mongoose.model("Question", questionSchema);
 const circuitronQuestion=conn.circuitron.model("Question",questionSchema);
 const xenatusQuestion=conn.xenatus.model("Question",questionSchema);
-const c2cQuestion=conn.c2c.model("Question",questionSchema);
+const c2cQuestionSet1=conn.c2c.model("question-set-1",questionSchema);
+const c2cQuestionSet2=conn.c2c.model("question-set-2",questionSchema);
 
-
-module.exports = {couchPotatoQuestion,circuitronQuestion,xenatusQuestion,c2cQuestion};
+module.exports = {couchPotatoQuestion,circuitronQuestion,xenatusQuestion,c2cQuestionSet1,c2cQuestionSet2};

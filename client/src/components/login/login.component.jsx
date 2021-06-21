@@ -47,9 +47,11 @@ const Login = ({ history }) => {
   const [open, setOpen] = React.useState(false);
   var [severity, setSeverity] = React.useState(""); //success,error,warning,info
   var [message, setMessage] = React.useState(""); //change message
+  const [eventname, setEventname] = React.useState("");
   const onClickFunction = () => {
+    // console.log("event ref value is",eventRef.current.value,"eventName is",eventname)
     axios
-      .post(`http://localhost:3001/circuitron/login`, {
+      .post(`http://localhost:3001/${eventname}/login`, {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       })
@@ -59,8 +61,9 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          var link = "/"+"circuitron"+"/quiz/" + res.data.currentToken + "/";
+          var link = "/"+eventname+"/quiz/" + res.data.currentToken + "/";
           console.log(link);
+         
           setTimeout(() => history.push(link), 2000);
         }
         if (res.data.status === "Error") {
@@ -87,8 +90,7 @@ const Login = ({ history }) => {
 
     setOpen(false);
   };
-  const [eventname, setEventname] = React.useState("");
-
+  
   const handleChange = (event) => {
     setEventname(event.target.value);
   };
@@ -119,9 +121,9 @@ const Login = ({ history }) => {
               Event-Name
             </InputLabel>
             <Select
+              ref={eventRef}
               labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
-              ref={eventRef}
               value={eventname}
               onChange={handleChange}
               className={classes.selectEmpty}

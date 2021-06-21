@@ -1,11 +1,13 @@
 const express = require("express");
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
+const jwt=require("jsonwebtoken");
 
 const auth = require("../middleware/auth");
-const {c2cQuestion} = require("../models/question");
+const {c2cQuestionSet1} = require("../models/question");
 const {c2cResponse} = require("../models/response");
 const {c2cUser} = require("../models/user");
+const {c2cMainSiteUser}=require("../models/main-site-user");
 
 const router = new express.Router();
 
@@ -60,7 +62,7 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    c2cQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    c2cQuestionSet1.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -96,7 +98,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
       }
     });
     const response = new c2cResponse({ questions: req.body, owner: req._id });
-    const user = await c2cUser.findOneAndUpdate(
+    const user = await c2cMainSiteUser.findOneAndUpdate(
       { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
@@ -139,8 +141,8 @@ router.post("/getTime/:authToken", auth, async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    // console.log("In endpoint,username and password is",req.body);
-    // const user=new User(req.body);
+    //  console.log("In endpoint,username and password is",req.body);
+    // const user=new c2cMainSiteUser({name:"kshitij deshpande",college:"pict",CA:"",phone:"9518535604",branch:"IT",year:"SE",event:"Circuitron",email:req.body.username,password:req.body.password});
     // bcrypt.genSalt(10,async (err, salt) => {
     //     bcrypt.hash(user.password, salt,async (err, hash) => {
     //       if (err) throw err;
@@ -160,12 +162,27 @@ router.post("/login", async (req, res) => {
     
     
 
-    const user = await c2cUser.findByCredentials(
-      req.body.username,
-      req.body.password
-    );
-    const token = await user.generateAuthToken();
-    await user.save();
+    
+    // const user=await circuitronUser.findOne({username:req.body.username})
+
+    const user=await c2cMainSiteUser.findOne({email:req.body.username})
+
+    console.log(user);
+    if(!user){
+        throw new Error('Unable to login')
+    }
+
+    const isMatch=await bcrypt.compare(req.body.password,user.password)
+
+    if(!isMatch){
+        throw new Error("Unable to login")
+    }
+    const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
+      expiresIn: '60m'
+   })
+    user.tokens=user.tokens.concat({token})
+    await user.save()
+
     res.json({
       status: "Success",
       user: user,

@@ -1,23 +1,25 @@
 const express = require("express");
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
-const mongodb=require("mongodb");
+const MongoClient=require("mongodb").MongoClient;
+const jwt=require('jsonwebtoken')
 
 const auth = require("../middleware/auth");
 const {circuitronQuestion} = require("../models/question");
 const {circuitronResponse} = require("../models/response");
 const {circuitronUser} = require("../models/user");
+const {circuitronMainSiteUser}=require("../models/main-site-user");
 
 const router = new express.Router();
 
-mongodb.connect(
-  "mongodb+srv://couch_potato_user:couch_potato_user@couch-potato.g9qjz.mongodb.net/Circuitron",
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  function (err, client) {
-    db = client.db()
-    console.log("connected to db")
-  }
-)
+// mongodb.connect(
+//   "mongodb+srv://couch_potato_user:couch_potato_user@couch-potato.g9qjz.mongodb.net/Circuitron",
+//   { useNewUrlParser: true, useUnifiedTopology: true },
+//   function (err, client) {
+//     db = client.db()
+//     console.log("connected to db")
+//   }
+// )
 // router.post("/createQuestion", async (req, res) => {
 //   try {
 //     const question = new Question(req.body);
@@ -106,7 +108,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
     });
 
     const response = new circuitronResponse({ questions: req.body, owner: req._id });
-    const user = await circuitronUser.findOneAndUpdate(
+    const user = await circuitronMainSiteUser.findOneAndUpdate(
       { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
@@ -150,7 +152,7 @@ router.post("/getTime/:authToken", auth, async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // console.log("In endpoint,username and password is",req.body);
-    // const user=new User(req.body);
+    // const user=new circuitronMainSiteUser({name:"kshitij deshpande",college:"pict",CA:"",phone:"9518535604",branch:"IT",year:"SE",event:"Circuitron",email:req.body.username,password:req.body.password});
     // bcrypt.genSalt(10,async (err, salt) => {
     //     bcrypt.hash(user.password, salt,async (err, hash) => {
     //       if (err) throw err;
@@ -171,13 +173,11 @@ router.post("/login", async (req, res) => {
     
 
     
-    const user=await circuitronUser.findOne({username:req.body.username})
-    // console.log("username in end point is",req.body.username);
-    // // var collection=db.collection
-    // // const user=db.find({email:req.body.username}).toArray(function (err, items) {
-    // // })[0]
+    // const user=await circuitronUser.findOne({username:req.body.username})
 
-    // console.log(user);
+    const user=await circuitronMainSiteUser.findOne({email:req.body.username})
+
+    console.log(user);
     if(!user){
         throw new Error('Unable to login')
     }
@@ -186,9 +186,13 @@ router.post("/login", async (req, res) => {
 
     if(!isMatch){
         throw new Error("Unable to login")
-    }   
-    const token = await user.generateAuthToken();
-    await user.save();
+    }
+    const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
+      expiresIn: '60m'
+   })
+    user.tokens=user.tokens.concat({token})
+    await user.save()
+
     res.json({
       status: "Success",
       user: user,

@@ -125,7 +125,7 @@ const circuitronUser=conn.circuitron.model("User",userSchema);
 const xenatusUser=conn.xenatus.model("User",userSchema);
 const c2cUser=conn.c2c.model("User",userSchema);
 
-module.exports={couchPotatoUser,circuitronUser,xenatusUser}
+module.exports={couchPotatoUser,circuitronUser,xenatusUser,c2cUser}
 
 
 // List of mcqs 

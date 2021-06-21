@@ -25,7 +25,7 @@ useCreateIndex:true,
 useFindAndModify:false
 })
 
-mongoose.c2c=mongoose.createConnection("mongodb+srv://xenatus_user:xenatus_user@xe-natus.0yjzp.mongodb.net/Xenatus",{ //process.env.MONGODB_URL
+mongoose.c2c=mongoose.createConnection("mongodb+srv://ctc_user:ctc_user@ctc.13csz.mongodb.net/ctc",{ //process.env.MONGODB_URL
 useNewUrlParser:true,
 useCreateIndex:true,
 useFindAndModify:false
