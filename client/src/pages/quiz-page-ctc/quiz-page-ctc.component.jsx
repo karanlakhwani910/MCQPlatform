@@ -8,27 +8,27 @@ import { withRouter } from "react-router-dom";
 
 import { createStructuredSelector } from "reselect";
 import {
-  setFetchedQuestionsToState,
-  selectedQuestionNext,
-  selectedQuestionPrevious,
-  setSelectedQuestion,
+  setFetchedQuestionsToStateC2c,
+  selectedQuestionNextC2c,
+  selectedQuestionPreviousC2c,
+  setSelectedQuestionC2c,
   // setRecentFetchedTime
-} from "../../redux/question/question.actions";
+} from "../../redux/c2c-question/question.actions";
 import { setRecentFetchedTime } from "../../redux/general/general.actions";
 import {
-  getSelectedQuestion,
-  getSelectedQuestionNumber,
-  getQuestions,
-} from "../../redux/question/question.selector";
+  getSelectedQuestionC2c,
+  getSelectedQuestionNumberC2c,
+  getQuestionsC2c,
+} from "../../redux/c2c-question/question.selector";
 import { getRecentFetchedTime } from "../../redux/general/general.selector";
 
 import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
-import McqComponent from "../../components/mcq/mcq.component";
+import McqComponent from "../../components/mcq-c2c/mcq.component";
 import TimerComponent from "../../components/timer/timer.component";
 import Loader from "../../components/loader/loader.component";
-import TemporaryDrawer from "../../components/drawer/TemporaryDrawer";
+import TemporaryDrawer from "../../components/drawer-c2c/TemporaryDrawer";
 
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -58,14 +58,14 @@ class QuizPageCTC extends Component {
     //   Location.reload(false)
 
     // }
-    if (this.props.questions.length === 0) {
+    if (this.props.questionsC2c.length === 0) {
       axios
         .post("http://localhost:3001/c2c/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
-          this.props.setFetchedQuestionsToState(res.data);
-          this.props.setSelectedQuestion(1);
+          this.props.setFetchedQuestionsToStateC2c(res.data);
+          this.props.setSelectedQuestionC2c(1);
           console.log("action initialised");
           this.setState({ mounted: true }, console.log(this.state));
         })
@@ -73,7 +73,7 @@ class QuizPageCTC extends Component {
           console.log("an error has occurred : ", error);
         });
     } else {
-      this.props.setSelectedQuestion(1);
+      this.props.setSelectedQuestionC2c(1);
       this.setState({ mounted: true }, () => console.log(this.state));
     }
     console.log(this.props);
@@ -176,8 +176,8 @@ class QuizPageCTC extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionPrevious(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionPreviousC2c(
+                            this.props.selectedQuestionNumberC2c
                           );
                           console.log(this.props);
                         }}
@@ -188,7 +188,7 @@ class QuizPageCTC extends Component {
                         variant="contained"
                         color="secondary"
                         className="buttonStyle"
-                        onClick={() => this.submit(this, this.props.questions)}
+                        onClick={() => this.submit(this, this.props.questionsC2c)}
                       >
                         Submit
                       </Button>
@@ -197,8 +197,8 @@ class QuizPageCTC extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionNext(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionNextC2c(
+                            this.props.selectedQuestionNumberC2c
                           );
                         }}
                       >
@@ -318,29 +318,29 @@ const Wrapper = styled.section`
 // }
 
 const mapDispatchToProps = (dispatch) => ({
-  setFetchedQuestionsToState: (questions) =>
-    dispatch(setFetchedQuestionsToState(questions)),
-  selectedQuestionNext: (num) => {
+  setFetchedQuestionsToStateC2c: (questions) =>
+    dispatch(setFetchedQuestionsToStateC2c(questions)),
+  selectedQuestionNextC2c: (num) => {
     if (num === 4) {
     } else {
-      dispatch(selectedQuestionNext(num));
+      dispatch(selectedQuestionNextC2c(num));
     }
   },
-  selectedQuestionPrevious: (num) => {
+  selectedQuestionPreviousC2c: (num) => {
     if (num === 0) {
     } else {
-      dispatch(selectedQuestionPrevious(num));
+      dispatch(selectedQuestionPreviousC2c(num));
     }
   },
-  setSelectedQuestion: (num) => dispatch(setSelectedQuestion(num)),
+  setSelectedQuestionC2c: (num) => dispatch(setSelectedQuestionC2c(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 
 const mapStateToProps = createStructuredSelector({
-  questions: getQuestions,
-  selectedQuestion: getSelectedQuestion,
-  selectedQuestionNumber: getSelectedQuestionNumber,
-  fetchedTime: getRecentFetchedTime,
+  questionsC2c: getQuestionsC2c,
+  selectedQuestionC2c: getSelectedQuestionC2c,
+  selectedQuestionNumberC2c: getSelectedQuestionNumberC2c,
+  fetchedTimeC2c: getRecentFetchedTime,
 });
 
 export default withRouter(

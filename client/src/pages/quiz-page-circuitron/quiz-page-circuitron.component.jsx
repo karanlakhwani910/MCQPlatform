@@ -8,27 +8,27 @@ import { withRouter } from "react-router-dom";
 
 import { createStructuredSelector } from "reselect";
 import {
-  setFetchedQuestionsToState,
-  selectedQuestionNext,
-  selectedQuestionPrevious,
-  setSelectedQuestion,
+  setFetchedQuestionsToStateCircuitron,
+  selectedQuestionNextCircuitron,
+  selectedQuestionPreviousCircuitron,
+  setSelectedQuestionCircuitron,
   // setRecentFetchedTime
-} from "../../redux/question/question.actions";
+} from "../../redux/circuitron-question/question.actions";
 import { setRecentFetchedTime } from "../../redux/general/general.actions";
 import {
-  getSelectedQuestion,
-  getSelectedQuestionNumber,
-  getQuestions,
-} from "../../redux/question/question.selector";
+  getSelectedQuestionCircuitron,
+  getSelectedQuestionNumberCircuitron,
+  getQuestionsCircuitron,
+} from "../../redux/circuitron-question/question.selector";
 import { getRecentFetchedTime } from "../../redux/general/general.selector";
 
 import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
-import McqComponent from "../../components/mcq/mcq.component";
+import McqComponent from "../../components/mcq-circuitron/mcq.component";
 import TimerComponent from "../../components/timer/timer.component";
 import Loader from "../../components/loader/loader.component";
-import TemporaryDrawer from "../../components/drawer/TemporaryDrawer";
+import TemporaryDrawer from "../../components/drawer-circuitron/TemporaryDrawer";
 
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -58,14 +58,14 @@ class QuizPageCircuitRon extends Component {
     //   Location.reload(false)
 
     // }
-    if (this.props.questions.length === 0) {
+    if (this.props.questionsCircuitron.length === 0) {
       axios
         .post("http://localhost:3001/circuitron/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
-          this.props.setFetchedQuestionsToState(res.data);
-          this.props.setSelectedQuestion(1);
+          this.props.setFetchedQuestionsToStateCircuitron(res.data);
+          this.props.setSelectedQuestionCircuitron(1);
           console.log("action initialised");
           this.setState({ mounted: true }, console.log(this.state));
         })
@@ -73,7 +73,7 @@ class QuizPageCircuitRon extends Component {
           console.log("an error has occurred : ", error);
         });
     } else {
-      this.props.setSelectedQuestion(1);
+      this.props.setSelectedQuestionCircuitron(1);
       this.setState({ mounted: true }, () => console.log(this.state));
     }
     console.log(this.props);
@@ -88,7 +88,7 @@ class QuizPageCircuitRon extends Component {
           this.props.history.push("/");
         } else {
           if (res.data.time <= 0) {
-            this.submit(this, this.props.questions);
+            this.submit(this, this.props.questionsCircuitron);
           }
           this.props.setRecentFetchedTime(res.data.time);
         }
@@ -102,14 +102,14 @@ class QuizPageCircuitRon extends Component {
       });
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsCircuitron);
     }
   }
 
   componentWillUpdate() {
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsCircuitron);
     }
     console.log("Fetched time in main component is", this.props.fetchedTime);
   }
@@ -176,8 +176,8 @@ class QuizPageCircuitRon extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionPrevious(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionPreviousCircuitron(
+                            this.props.selectedQuestionNumberCircuitron
                           );
                           console.log(this.props);
                         }}
@@ -188,7 +188,7 @@ class QuizPageCircuitRon extends Component {
                         variant="contained"
                         color="secondary"
                         className="buttonStyle"
-                        onClick={() => this.submit(this, this.props.questions)}
+                        onClick={() => this.submit(this, this.props.questionsCircuitron)}
                       >
                         Submit
                       </Button>
@@ -197,8 +197,8 @@ class QuizPageCircuitRon extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionNext(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionNextCircuitron(
+                            this.props.selectedQuestionNumberCircuitron
                           );
                         }}
                       >
@@ -318,28 +318,28 @@ const Wrapper = styled.section`
 // }
 
 const mapDispatchToProps = (dispatch) => ({
-  setFetchedQuestionsToState: (questions) =>
-    dispatch(setFetchedQuestionsToState(questions)),
-  selectedQuestionNext: (num) => {
+  setFetchedQuestionsToStateCircuitron: (questions) =>
+    dispatch(setFetchedQuestionsToStateCircuitron(questions)),
+  selectedQuestionNextCircuitron: (num) => {
     if (num === 4) {
     } else {
-      dispatch(selectedQuestionNext(num));
+      dispatch(selectedQuestionNextCircuitron(num));
     }
   },
-  selectedQuestionPrevious: (num) => {
+  selectedQuestionPreviousCircuitron: (num) => {
     if (num === 0) {
     } else {
-      dispatch(selectedQuestionPrevious(num));
+      dispatch(selectedQuestionPreviousCircuitron(num));
     }
   },
-  setSelectedQuestion: (num) => dispatch(setSelectedQuestion(num)),
+  setSelectedQuestionCircuitron: (num) => dispatch(setSelectedQuestionCircuitron(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 
 const mapStateToProps = createStructuredSelector({
-  questions: getQuestions,
-  selectedQuestion: getSelectedQuestion,
-  selectedQuestionNumber: getSelectedQuestionNumber,
+  questionsCircuitron: getQuestionsCircuitron,
+  selectedQuestionCircuitron: getSelectedQuestionCircuitron,
+  selectedQuestionNumberCircuitron: getSelectedQuestionNumberCircuitron,
   fetchedTime: getRecentFetchedTime,
 });
 

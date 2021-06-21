@@ -1,0 +1,29 @@
+.drawerStyles {
+  background-color: transparent;
+}
+.IconColor {
+  color: white;
+  // background-color: rgba(255, 0, 0, 0.726);
+  position: absolute;
+  top: 0;
+  right: -7px;
+  font-size: 30px;
+}
+.closeButtonPosition {
+  top: -28%;
+  right: 0%;
+}
+.IconColor:hover {
+  color: white;
+  background-color: #a50010;
+  position: absolute;
+}
+.Styling {
+  border: none;
+}
+.menuStyle {
+  right: 99%;
+}
+.fixed-top {
+  right: 99%;
+}

@@ -8,27 +8,27 @@ import { withRouter } from "react-router-dom";
 
 import { createStructuredSelector } from "reselect";
 import {
-  setFetchedQuestionsToState,
-  selectedQuestionNext,
-  selectedQuestionPrevious,
-  setSelectedQuestion,
+  setFetchedQuestionsToStateXenatus,
+  selectedQuestionNextXenatus,
+  selectedQuestionPreviousXenatus,
+  setSelectedQuestionXenatus,
   // setRecentFetchedTime
-} from "../../redux/question/question.actions";
+} from "../../redux/xenatus-question/question.actions";
 import { setRecentFetchedTime } from "../../redux/general/general.actions";
 import {
-  getSelectedQuestion,
-  getSelectedQuestionNumber,
-  getQuestions,
-} from "../../redux/question/question.selector";
+  getSelectedQuestionXenatus,
+  getSelectedQuestionNumberXenatus,
+  getQuestionsXenatus,
+} from "../../redux/xenatus-question/question.selector";
 import { getRecentFetchedTime } from "../../redux/general/general.selector";
 
 import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
-import McqComponent from "../../components/mcq/mcq.component";
+import McqComponent from "../../components/mcq-xenatus/mcq.component";
 import TimerComponent from "../../components/timer/timer.component";
 import Loader from "../../components/loader/loader.component";
-import TemporaryDrawer from "../../components/drawer/TemporaryDrawer";
+import TemporaryDrawer from "../../components/drawer-xenatus/TemporaryDrawer";
 
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -64,8 +64,8 @@ class QuizPageXenatus extends Component {
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
-          this.props.setFetchedQuestionsToState(res.data);
-          this.props.setSelectedQuestion(1);
+          this.props.setFetchedQuestionsToStateXenatus(res.data);
+          this.props.setSelectedQuestionXenatus(1);
           console.log("action initialised");
           this.setState({ mounted: true }, console.log(this.state));
         })
@@ -73,7 +73,7 @@ class QuizPageXenatus extends Component {
           console.log("an error has occurred : ", error);
         });
     } else {
-      this.props.setSelectedQuestion(1);
+      this.props.setSelectedQuestionXenatus(1);
       this.setState({ mounted: true }, () => console.log(this.state));
     }
     console.log(this.props);
@@ -88,7 +88,7 @@ class QuizPageXenatus extends Component {
           this.props.history.push("/");
         } else {
           if (res.data.time <= 0) {
-            this.submit(this, this.props.questions);
+            this.submit(this, this.props.questionsXenatus);
           }
           this.props.setRecentFetchedTime(res.data.time);
         }
@@ -102,14 +102,14 @@ class QuizPageXenatus extends Component {
       });
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsXenatus);
     }
   }
 
   componentWillUpdate() {
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsXenatus);
     }
     console.log("Fetched time in main component is", this.props.fetchedTime);
   }
@@ -176,8 +176,8 @@ class QuizPageXenatus extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionPrevious(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionPreviousXenatus(
+                            this.props.selectedQuestionNumberXenatus
                           );
                           console.log(this.props);
                         }}
@@ -188,7 +188,7 @@ class QuizPageXenatus extends Component {
                         variant="contained"
                         color="secondary"
                         className="buttonStyle"
-                        onClick={() => this.submit(this, this.props.questions)}
+                        onClick={() => this.submit(this, this.props.questionsXenatus)}
                       >
                         Submit
                       </Button>
@@ -197,8 +197,8 @@ class QuizPageXenatus extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionNext(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionNextXenatus(
+                            this.props.selectedQuestionNumberXenatus
                           );
                         }}
                       >
@@ -318,28 +318,28 @@ const Wrapper = styled.section`
 // }
 
 const mapDispatchToProps = (dispatch) => ({
-  setFetchedQuestionsToState: (questions) =>
-    dispatch(setFetchedQuestionsToState(questions)),
-  selectedQuestionNext: (num) => {
+  setFetchedQuestionsToStateXenatus: (questions) =>
+    dispatch(setFetchedQuestionsToStateXenatus(questions)),
+  selectedQuestionNextXenatus: (num) => {
     if (num === 4) {
     } else {
-      dispatch(selectedQuestionNext(num));
+      dispatch(selectedQuestionNextXenatus(num));
     }
   },
-  selectedQuestionPrevious: (num) => {
+  selectedQuestionPreviousXenatus: (num) => {
     if (num === 0) {
     } else {
-      dispatch(selectedQuestionPrevious(num));
+      dispatch(selectedQuestionPreviousXenatus(num));
     }
   },
-  setSelectedQuestion: (num) => dispatch(setSelectedQuestion(num)),
+  setSelectedQuestionXenatus: (num) => dispatch(setSelectedQuestionXenatus(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 
 const mapStateToProps = createStructuredSelector({
-  questions: getQuestions,
-  selectedQuestion: getSelectedQuestion,
-  selectedQuestionNumber: getSelectedQuestionNumber,
+  questionsXenatus: getQuestionsXenatus,
+  selectedQuestionXenatus: getSelectedQuestionXenatus,
+  selectedQuestionNumberXenatus: getSelectedQuestionNumberXenatus,
   fetchedTime: getRecentFetchedTime,
 });
 

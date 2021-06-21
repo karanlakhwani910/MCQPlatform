@@ -1,0 +1,38 @@
+@font-face {
+  font-family: Fenix;
+  src: url(Fenix-Regular.ttf);
+}
+.question {
+  font-family: Fenix;
+  margin: auto 12% auto auto;
+  // background-color: red;
+  color: red;
+}
+
+.MuiInputBase-input {
+  color: green;
+}
+#standard-multiline-flexible {
+  color: white;
+  font-family: Fenix;
+  font-size: 18px;
+  width: 100%;
+  text-align: justify;
+  padding-bottom: -20px;
+}
+#standard-multiline-flexible-label {
+  color: white;
+  font-family: Fenix;
+  font-size: 25px;
+}
+.makeStyles-root-13 .MuiTextField-root {
+  width: 100%;
+  margin: 2px;
+  display: flex;
+  flex-wrap: wrap;
+}
+@media only screen and (min-width: 600px) {
+  #standard-multiline-flexible {
+    font-size: 28px;
+  }
+}

@@ -8,27 +8,27 @@ import { withRouter } from "react-router-dom";
 
 import { createStructuredSelector } from "reselect";
 import {
-  setFetchedQuestionsToState,
-  selectedQuestionNext,
-  selectedQuestionPrevious,
-  setSelectedQuestion,
+  setFetchedQuestionsToStateCouchPotato,
+  selectedQuestionNextCouchPotato,
+  selectedQuestionPreviousCouchPotato,
+  setSelectedQuestionCouchPotato,
   // setRecentFetchedTime
-} from "../../redux/question/question.actions";
+} from "../../redux/couchPotato-question/question.actions";
 import { setRecentFetchedTime } from "../../redux/general/general.actions";
 import {
-  getSelectedQuestion,
-  getSelectedQuestionNumber,
-  getQuestions,
-} from "../../redux/question/question.selector";
+  getSelectedQuestionCouchPotato,
+  getSelectedQuestionNumberCouchPotato,
+  getQuestionsCouchPotato,
+} from "../../redux/couchPotato-question/question.selector";
 import { getRecentFetchedTime } from "../../redux/general/general.selector";
 
 import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
-import McqComponent from "../../components/mcq/mcq.component";
+import McqComponent from "../../components/mcq-couchPotato/mcq.component";
 import TimerComponent from "../../components/timer/timer.component";
 import Loader from "../../components/loader/loader.component";
-import TemporaryDrawer from "../../components/drawer/TemporaryDrawer";
+import TemporaryDrawer from "../../components/drawer-couchPotato/TemporaryDrawer";
 
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -64,8 +64,8 @@ class QuizPageCP extends Component {
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
-          this.props.setFetchedQuestionsToState(res.data);
-          this.props.setSelectedQuestion(1);
+          this.props.setFetchedQuestionsToStateCouchPotato(res.data);
+          this.props.setSelectedQuestionCouchPotato(1);
           console.log("action initialised");
           this.setState({ mounted: true }, console.log(this.state));
         })
@@ -73,7 +73,7 @@ class QuizPageCP extends Component {
           console.log("an error has occurred : ", error);
         });
     } else {
-      this.props.setSelectedQuestion(1);
+      this.props.setSelectedQuestionCouchPotato(1);
       this.setState({ mounted: true }, () => console.log(this.state));
     }
     console.log(this.props);
@@ -88,7 +88,7 @@ class QuizPageCP extends Component {
           this.props.history.push("/");
         } else {
           if (res.data.time <= 0) {
-            this.submit(this, this.props.questions);
+            this.submit(this, this.props.questionsCouchPotato);
           }
           this.props.setRecentFetchedTime(res.data.time);
         }
@@ -102,14 +102,14 @@ class QuizPageCP extends Component {
       });
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsCouchPotato);
     }
   }
 
   componentWillUpdate() {
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsCouchPotato);
     }
     console.log("Fetched time in main component is", this.props.fetchedTime);
   }
@@ -176,8 +176,8 @@ class QuizPageCP extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionPrevious(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionPreviousCouchPotato(
+                            this.props.selectedQuestionNumberCouchPotato
                           );
                           console.log(this.props);
                         }}
@@ -188,7 +188,7 @@ class QuizPageCP extends Component {
                         variant="contained"
                         color="secondary"
                         className="buttonStyle"
-                        onClick={() => this.submit(this, this.props.questions)}
+                        onClick={() => this.submit(this, this.props.questionsCouchPotato)}
                       >
                         Submit
                       </Button>
@@ -197,8 +197,8 @@ class QuizPageCP extends Component {
                         color="secondary"
                         className="buttonStyle"
                         onClick={() => {
-                          this.props.selectedQuestionNext(
-                            this.props.selectedQuestionNumber
+                          this.props.selectedQuestionNextCouchPotato(
+                            this.props.selectedQuestionNumberCouchPotato
                           );
                         }}
                       >
@@ -318,28 +318,28 @@ const Wrapper = styled.section`
 // }
 
 const mapDispatchToProps = (dispatch) => ({
-  setFetchedQuestionsToState: (questions) =>
-    dispatch(setFetchedQuestionsToState(questions)),
-  selectedQuestionNext: (num) => {
+  setFetchedQuestionsToStateCouchPotato: (questions) =>
+    dispatch(setFetchedQuestionsToStateCouchPotato(questions)),
+  selectedQuestionNextCouchPotato: (num) => {
     if (num === 4) {
     } else {
-      dispatch(selectedQuestionNext(num));
+      dispatch(selectedQuestionNextCouchPotato(num));
     }
   },
-  selectedQuestionPrevious: (num) => {
+  selectedQuestionPreviousCouchPotato: (num) => {
     if (num === 0) {
     } else {
-      dispatch(selectedQuestionPrevious(num));
+      dispatch(selectedQuestionPreviousCouchPotato(num));
     }
   },
-  setSelectedQuestion: (num) => dispatch(setSelectedQuestion(num)),
+  setSelectedQuestionCouchPotato: (num) => dispatch(setSelectedQuestionCouchPotato(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 
 const mapStateToProps = createStructuredSelector({
-  questions: getQuestions,
-  selectedQuestion: getSelectedQuestion,
-  selectedQuestionNumber: getSelectedQuestionNumber,
+  questionsCouchPotato: getQuestionsCouchPotato,
+  selectedQuestionCouchPotato: getSelectedQuestionCouchPotato,
+  selectedQuestionNumberCouchPotato: getSelectedQuestionNumberCouchPotato,
   fetchedTime: getRecentFetchedTime,
 });
 
