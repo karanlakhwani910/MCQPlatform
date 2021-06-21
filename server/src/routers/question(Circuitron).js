@@ -171,12 +171,13 @@ router.post("/login", async (req, res) => {
     
 
     
-    // const user=await circuitronUser.findOne({username:req.body.username})
-    console.log("username in end point is",req.body.username)
-    const user=db.find({email:req.body.username}).toArray(function (err, items) {
-    })[0]
+    const user=await circuitronUser.findOne({username:req.body.username})
+    // console.log("username in end point is",req.body.username);
+    // // var collection=db.collection
+    // // const user=db.find({email:req.body.username}).toArray(function (err, items) {
+    // // })[0]
 
-    console.log(user);
+    // console.log(user);
     if(!user){
         throw new Error('Unable to login')
     }
