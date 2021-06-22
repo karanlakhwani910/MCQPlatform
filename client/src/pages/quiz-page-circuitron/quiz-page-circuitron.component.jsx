@@ -321,7 +321,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFetchedQuestionsToStateCircuitron: (questions) =>
     dispatch(setFetchedQuestionsToStateCircuitron(questions)),
   selectedQuestionNextCircuitron: (num) => {
-    if (num === 4) {
+    if (num === 29) {
     } else {
       dispatch(selectedQuestionNextCircuitron(num));
     }

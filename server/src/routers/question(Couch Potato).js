@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
 const auth = require("../middleware/auth");
-const {couchPotatoQuestion} = require("../models/question");
+const {couchPotatoBBTQuestion} = require("../models/question");
 const {couchPotatoResponse} = require("../models/response");
 const {couchPotatoMainSiteUser} = require("../models/main-site-user");
 
@@ -60,21 +60,54 @@ const router = new express.Router();
 router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
+    console.log("inside end point",req.body.selectedSeries)
+    // var all=await couchPotatoResponse.find({});
+    // console.log(all);
+    var finalArray=[];
+    var total=0
+    var finalestArray=req.body.selectedSeries.reduce((total,value,index,array)=>{
+          if(value.Series==="GOT")
+          {
+            couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("results are");
+                console.log(results)
+                var newresults=results.map((question)=>{
+                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                    return question;
+                })
+                return newresults.concat(finalArray)
+                // console.log(newresults)
+              }
+            });
+          }
+          else if(value.Series==="Harry Potter")
+          {
 
-    couchPotatoQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-      if (err) {
-        console.log(err);
-      } else {
-        var newresults=results.map((question)=>{
-            question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                        return question;
-        })
+          }
+          else if(value.Series==="Kota")
+          {
+            
+          }
+          else if(value.Series==="Suits")
+          {
 
-        
-        res.status(200).send(newresults);
-      }
-    });
+          }
+          else if(value.Series==="TBBT")
+          {
+
+          }
+          else if(value.Series==="Naruto")
+          {
+
+          }
+          
+    })
+    res.status(200).send(finalestArray);
   } catch (e) {
+    console.log(e)
     res.status(400).send(e);
   }
 });
@@ -97,7 +130,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
       }
     });
     const response = new couchPotatoResponse({ questions: req.body, owner: req._id });
-    const user = await couchPotatoUser.findOneAndUpdate(
+    const user = await couchPotatoMainSiteUser.findOneAndUpdate(
       { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );

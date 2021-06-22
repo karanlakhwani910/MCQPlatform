@@ -71,7 +71,7 @@ router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
 
-    circuitronQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    circuitronQuestion.findRandom({}, {}, { limit: 30 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {

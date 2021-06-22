@@ -61,10 +61,16 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          var link = "/"+eventname+"/quiz/" + res.data.currentToken + "/";
+          if(eventname==="couchPotato")
+          {
+            var link= "/"+eventname+"/selection/" + res.data.currentToken + "/";
+          }
+          else{
+            var link = "/"+eventname+"/quiz/" + res.data.currentToken + "/";
+          }
           console.log(link);
          
-          setTimeout(() => history.push(link), 2000);
+          history.push(link);
         }
         if (res.data.status === "Error") {
           setSeverity("error");

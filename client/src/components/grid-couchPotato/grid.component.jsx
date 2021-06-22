@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
-import { numbers } from "../../utils/number";
+import { numbers } from "../../utils/number-couchpotato";
 import { Button } from "@material-ui/core";
 
 import { setSelectedQuestionCouchPotato } from "../../redux/couchPotato-question/question.actions";

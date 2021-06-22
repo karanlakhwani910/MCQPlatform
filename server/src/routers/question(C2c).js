@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
 const auth = require("../middleware/auth");
-const {c2cQuestionSet1} = require("../models/question");
+const {c2cQuestionSet1,c2cQuestionSet2,c2cQuestionSet3} = require("../models/question");
 const {c2cResponse} = require("../models/response");
 const {c2cUser} = require("../models/user");
 const {c2cMainSiteUser}=require("../models/main-site-user");
@@ -61,21 +61,65 @@ const router = new express.Router();
 router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
-
-    c2cQuestionSet1.findRandom({}, {}, { limit: 5 }, function (err, results) {
-      if (err) {
-        console.log(err);
-      } else {
-        var newresults=results.map((question)=>{
-            question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                        return question;
-        })
-
-        
-        res.status(200).send(newresults);
+    // var newresults;
+    var randomset=Math.floor(Math.random() * 3);
+    console.log(randomset)
+      if (randomset===0)
+      {
+      console.log("in set 1");
+        c2cQuestionSet1.findRandom({}, {}, { limit: 30 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+          var newresults=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+    
+            
+            res.status(200).send(newresults);
+          }
+        });
       }
-    });
-  } catch (e) {
+      else if (randomset===1)
+      {
+        console.log("in set 2");
+        c2cQuestionSet2.findRandom({}, {}, { limit: 30 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+          var newresults=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+    
+            
+            res.status(200).send(newresults);
+          }
+        });
+      }
+      else if (randomset===3)
+      {
+        console.log("in set 3");
+        c2cQuestionSet2.findRandom({}, {}, { limit: 30 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+          var newresults=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+    
+            
+            res.status(200).send(newresults);
+          }
+        });
+      }
+
+    }
+
+   
+  catch (e) {
     res.status(400).send(e);
   }
 });

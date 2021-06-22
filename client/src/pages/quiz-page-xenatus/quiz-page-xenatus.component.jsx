@@ -58,7 +58,7 @@ class QuizPageXenatus extends Component {
     //   Location.reload(false)
 
     // }
-    if (this.props.questions.length === 0) {
+    if (this.props.questionsXenatus.length === 0) {
       axios
         .post("http://localhost:3001/xenatus/fetchQuestions")
         .then((res) => {

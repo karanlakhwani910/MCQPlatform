@@ -9,7 +9,7 @@ import QuizPageXenatus from "./pages/quiz-page-xenatus/quiz-page-xenatus.compone
 import QuizPageCircuitron from "./pages/quiz-page-circuitron/quiz-page-circuitron.component";
 import LandingPage from "./pages/landing-page/landing-page.component";
 import ThankyouPage from "./pages/thankyou-page/thankyou-page.component";
-import Couchpotato from "./pages/couch-potato-page/couch-potato.component";
+import CouchpotatoSelectionPage from "./pages/couch-potato-page/couch-potato.component";
 import Loader from "./components/loader/loader.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -18,10 +18,10 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact={true} path="/" component={LandingPage} />
-        {/* <Route exact={true} path="/" component={Couchpotato} /> */}
+        <Route exact={true} path="/couchPotato/selection/:authToken" component={CouchpotatoSelectionPage} />
         <Route exact={true} path="/c2c/quiz/:authToken" component={QuizPageCTC} />
-        {/* <Route exact={true} path="/couchPotato/quiz/:authToken" component={QuizPage} /> */}
-        // <Route exact={true} path="/xenatus/quiz/:authToken" component={QuizPageXenatus} />
+        <Route exact={true} path="/couchPotato/quiz/:authToken" component={QuizPageCP} />
+        <Route exact={true} path="/xenatus/quiz/:authToken" component={QuizPageXenatus} />
         {/* <Route exact={true} path="//quiz/:authToken" component={QuizPage} />  */}
         <Route exact={true} path="/circuitron/quiz/:authToken" component={QuizPageCircuitron} />
         {/* <Route

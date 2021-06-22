@@ -16,9 +16,9 @@ const persistConfig = {
   whitelist: [
     "user",
     "circuitronQuestion",
-    "c2cQuestion",
-    "xenatusQuestion",
-    "couchPotatoQuestion",
+    // "c2cQuestion",
+    // "xenatusQuestion",
+    // "couchPotatoQuestion",
   ],
 };
 

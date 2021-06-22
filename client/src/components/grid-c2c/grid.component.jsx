@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
-import { numbers } from "../../utils/number";
+import { numbers } from "../../utils/number-c2c";
 import { Button } from "@material-ui/core";
 
 import { setSelectedQuestionC2c } from "../../redux/c2c-question/question.actions";

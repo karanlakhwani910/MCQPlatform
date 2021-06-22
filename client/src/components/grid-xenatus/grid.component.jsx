@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
-import { numbers } from "../../utils/number";
+import { numbers } from "../../utils/number-xenatus";
 import { Button } from "@material-ui/core";
 
 import { setSelectedQuestionXenatus } from "../../redux/xenatus-question/question.actions";
@@ -226,7 +226,7 @@ const StyledButton = styled(Button)`
 `;
 
 const mapDispatchToProps = (dispatch) => ({
-  setSelectedQuestion: (question) => dispatch(setSelectedQuestionXenatus(question)),
+  setSelectedQuestionXenatus: (question) => dispatch(setSelectedQuestionXenatus(question)),
 });
 
 const mapStateToProps = createStructuredSelector({

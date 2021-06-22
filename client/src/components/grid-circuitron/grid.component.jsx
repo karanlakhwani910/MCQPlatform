@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
-import { numbers } from "../../utils/number";
+import { numbers } from "../../utils/number-circuitron";
 import { Button } from "@material-ui/core";
 
 import { setSelectedQuestionCircuitron } from "../../redux/circuitron-question/question.actions";

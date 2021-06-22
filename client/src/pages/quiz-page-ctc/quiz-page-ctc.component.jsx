@@ -88,7 +88,7 @@ class QuizPageCTC extends Component {
           this.props.history.push("/");
         } else {
           if (res.data.time <= 0) {
-            this.submit(this, this.props.questions);
+            this.submit(this, this.props.questionsC2c);
           }
           this.props.setRecentFetchedTime(res.data.time);
         }
@@ -102,14 +102,14 @@ class QuizPageCTC extends Component {
       });
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsC2c);
     }
   }
 
   componentWillUpdate() {
     if (this.props.fetchedTime <= 0) {
       console.log("here in if of will update");
-      this.submit(this, this.props.questions);
+      this.submit(this, this.props.questionsC2c);
     }
     console.log("Fetched time in main component is", this.props.fetchedTime);
   }
@@ -324,7 +324,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFetchedQuestionsToStateC2c: (questions) =>
     dispatch(setFetchedQuestionsToStateC2c(questions)),
   selectedQuestionNextC2c: (num) => {
-    if (num === 4) {
+    if (num === 29) {
     } else {
       dispatch(selectedQuestionNextC2c(num));
     }

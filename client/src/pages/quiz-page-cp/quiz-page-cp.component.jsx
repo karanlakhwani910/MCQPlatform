@@ -58,9 +58,9 @@ class QuizPageCP extends Component {
     //   Location.reload(false)
 
     // }
-    if (this.props.questions.length === 0) {
+    if (this.props.questionsCouchPotato.length === 0) {
       axios
-        .post("http://localhost:3001/couchPotato/fetchQuestions")
+        .post("http://localhost:3001/couchPotato/fetchQuestions",{selectedSeries:this.props.location.state.selectedSeries})
         .then((res) => {
           console.log(res);
           // this.setState(res.data);

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken")
 
 const auth = require("../middleware/auth");
-const {xenatusQuestion} = require("../models/question");
+const {xenatusQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion,circuitronQuestion} = require("../models/question");
 const {xenatusResponse} = require("../models/response");
 const {xenatusMainSiteUser} = require("../models/main-site-user");
 
@@ -60,8 +60,12 @@ const router = new express.Router();
 router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
+    // const questions=await xenatusQuantitiveQuestion.find({});
+    // const questions=await xenatusResponse.find({});
+    // console.log("response is logged",questions)
+    // var newresults;
 
-    xenatusQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -69,11 +73,41 @@ router.post("/fetchQuestions", async (req, res) => {
             question.correctAnswer=((question.correctAnswer+5)**7)%33;
                         return question;
         })
+        console.log("value of new results is",newresults)
+        xenatusNumericalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+            var newresults2=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+            console.log("value of new results is",newresults2)
+            var finalarray=newresults.concat(newresults2);
+            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+              if (err) {
+                console.log(err);
+              } else {
+                var newresults3=results.map((question)=>{
+                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                return question;
+                })
+                console.log("value of new results is",newresults3)
+                var finalarray2=finalarray.concat(newresults3);
+                
+                // console.log("after adding value of new results",newresults,newresults2)
+                res.status(200).send(finalarray2);
+              }
+    
+            })
+          }
 
+        })
         
-        res.status(200).send(newresults);
       }
+
     });
+    
   } catch (e) {
     res.status(400).send(e);
   }
@@ -82,6 +116,7 @@ router.post("/fetchQuestions", async (req, res) => {
 // saveResponse stores the response of the user in the database
 router.post("/saveResponse/:authToken", auth, async (req, res) => {
   try {
+    console.log("in endpoint for xenatus")
     const responsesArrray = req.body;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
@@ -97,7 +132,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
       }
     });
     const response = new xenatusResponse({ questions: req.body, owner: req._id });
-    const user = await xenatusUser.findOneAndUpdate(
+    const user = await xenatusMainSiteUser.findOneAndUpdate(
       { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
@@ -153,15 +188,19 @@ router.post("/login", async (req, res) => {
     //   });
     // await user.save();
     const date=new Date();
-    console.log("current date is",date);
-    const prevDate=new Date(2021, 5, 20, 8, 33, 30, 0);
-    console.log("prev date is",prevDate)
-    const nextDate=new Date(2021, 5, 20, 21, 33, 30, 0);
-    console.log("current compared to prev",prevDate<date,nextDate<date);
+    console.log("current date is",date.toLocaleString());
+    const prevDate=new Date(2021, 5, 22, 8, 33, 30, 0);
+    console.log("prev date is",prevDate.toLocaleString())
+    const nextDate=new Date(2021, 5, 22, 22, 33, 30, 0);
+    console.log("next date is",nextDate.toLocaleString())
+    // console.log("current compared to prev",prevDate<date,nextDate>date);
     
-    
+    if(!(date>prevDate&&date<nextDate))
+    {
+      res.json({ status: "Error", message: "Wait for your slot!" });
+    }
 
-    
+    else{
     // const user=await circuitronUser.findOne({username:req.body.username})
 
     const user=await xenatusMainSiteUser.findOne({email:req.body.username})
@@ -188,6 +227,7 @@ router.post("/login", async (req, res) => {
       currentToken: token,
       message: "Successfully logged in!",
     });
+  }
     // res.json({status:"Success",user:user})
     } catch (e) {
     console.log("Error:", e);
