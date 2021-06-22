@@ -48,8 +48,8 @@ const responseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const couchPotatoResponse = mongoose.model("Response", responseSchema);
-const circuitronResponse=conn.circuitron.model("Response",responseSchema);
+const circuitronResponse = mongoose.model("Response", responseSchema);
+const couchPotatoResponse=conn.couchPotato.model("Response",responseSchema);
 const xenatusResponse=conn.xenatus.model("Response",responseSchema);
 const c2cResponse=conn.c2c.model("Response",responseSchema)
 

@@ -60,52 +60,66 @@ const router = new express.Router();
 router.post("/fetchQuestions", async (req, res) => {
   try {
     //const question=await Question.find({});
-    console.log("inside end point",req.body.selectedSeries)
+    // console.log("inside end point",req.body.selectedSeries)
     // var all=await couchPotatoResponse.find({});
-    // console.log(all);
-    var finalArray=[];
-    var total=0
-    var finalestArray=req.body.selectedSeries.reduce((total,value,index,array)=>{
-          if(value.Series==="GOT")
-          {
-            couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log("results are");
-                console.log(results)
-                var newresults=results.map((question)=>{
-                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                    return question;
-                })
-                return newresults.concat(finalArray)
-                // console.log(newresults)
-              }
-            });
-          }
-          else if(value.Series==="Harry Potter")
-          {
+    // // console.log(all);
+    // var finalArray=[];
+    // var total=0
+    // var finalestArray=req.body.selectedSeries.reduce((total,value,index,array)=>{
+    //       if(value.Series==="GOT")
+    //       {
+    //         couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             console.log("results are");
+    //             console.log(results)
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             return newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //           }
+    //         });
+    //       }
+    //       else if(value.Series==="Harry Potter")
+    //       {
 
-          }
-          else if(value.Series==="Kota")
-          {
+    //       }
+    //       else if(value.Series==="Kota")
+    //       {
             
-          }
-          else if(value.Series==="Suits")
-          {
+    //       }
+    //       else if(value.Series==="Suits")
+    //       {
 
-          }
-          else if(value.Series==="TBBT")
-          {
+    //       }
+    //       else if(value.Series==="TBBT")
+    //       {
 
-          }
-          else if(value.Series==="Naruto")
-          {
+    //       }
+    //       else if(value.Series==="Naruto")
+    //       {
 
-          }
+    //       }
           
-    })
-    res.status(200).send(finalestArray);
+    // })
+    // res.status(200).send(finalestArray);
+
+    couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+      if (err) {
+        console.log(err);
+      } else {
+        var newresults=results.map((question)=>{
+            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                        return question;
+        })
+
+        
+        res.status(200).send(newresults);
+      }
+    });
   } catch (e) {
     console.log(e)
     res.status(400).send(e);

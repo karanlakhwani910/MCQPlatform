@@ -29,10 +29,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function HaveCardMedia({ image }) {
+  const classes = useStyles();
+  return (
+    <CardMedia className={classes.media}>
+      <img
+        className={classes.media}
+        // src="https://dl.dropboxusercontent.com/s/4tbw338pzuk6dro/i01_WhatsApp%20Image%202021-06-17%20at%2011.43.31%20AM.jpeg?dl=0"
+        src={image}
+        // src="https://dl.dropboxusercontent.com/s/mx1l2cvcnulihr4/Screenshot%20%28351%29.png?dl=0"
+      />
+    </CardMedia>
+  );
+}
+
+function NoCardMedia(props) {
+  const classes = useStyles();
+  return <div></div>;
+}
+
+
 const Question = function ({ questionCouchPotato,questionNumberCouchPotato}) {
   const classes = useStyles();
   const [value, setValue] = React.useState("Controlled");
 
+  const isImage = questionCouchPotato.image;
   // const handleChange = (event) => {
   //   setValue(event.target.value);
   // };
@@ -54,6 +75,12 @@ const Question = function ({ questionCouchPotato,questionNumberCouchPotato}) {
               disableUnderline: true,
             }}
           />
+
+          {isImage != undefined ? (
+            <HaveCardMedia image={questionCouchPotato.image} />
+          ) : (
+            <NoCardMedia />
+          )}
           {/* Uncomment card media to bring image  */}
           {/* <CardMedia className={classes.media}>
             <img
