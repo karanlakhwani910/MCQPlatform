@@ -18,18 +18,38 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact={true} path="/" component={LandingPage} />
-        <Route exact={true} path="/couchPotato/selection/:authToken" component={CouchpotatoSelectionPage} />
-        <Route exact={true} path="/c2c/quiz/:authToken" component={QuizPageCTC} />
-        <Route exact={true} path="/couchPotato/quiz/:authToken" component={QuizPageCP} />
-        <Route exact={true} path="/xenatus/quiz/:authToken" component={QuizPageXenatus} />
+        <Route
+          exact={true}
+          path="/couchPotato/selection/:authToken"
+          component={CouchpotatoSelectionPage}
+        />
+        <Route
+          exact={true}
+          path="/c2c/quiz/:authToken"
+          component={QuizPageCTC}
+        />
+        <Route
+          exact={true}
+          path="/couchPotato/quiz/:authToken"
+          component={QuizPageCP}
+        />
+        <Route
+          exact={true}
+          path="/xenatus/quiz/:authToken"
+          component={QuizPageXenatus}
+        />
         {/* <Route exact={true} path="//quiz/:authToken" component={QuizPage} />  */}
-        <Route exact={true} path="/circuitron/quiz/:authToken" component={QuizPageCircuitron} />
+        <Route
+          exact={true}
+          path="/circuitron/quiz/:authToken"
+          component={QuizPageCircuitron}
+        />
         {/* <Route
           exact={true}
           path="/xenatus/quiz/:authToken/"
           component={QuizPageXenatus}
         /> */}
-        
+
         <Route exact={true} path="/thankyou/#!" component={ThankyouPage} />
         {/* <Route exact={false} path="/loader" component={Loader} /> */}
       </Switch>
