@@ -18,7 +18,7 @@ const persistConfig = {
     "circuitronQuestion",
     // "c2cQuestion",
     // "xenatusQuestion",
-    // "couchPotatoQuestion",
+    "couchPotatoQuestion",
   ],
 };
 

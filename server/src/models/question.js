@@ -52,17 +52,17 @@ questionSchema.plugin(randomGenerator);
 const circuitronQuestion = mongoose.model("Question", questionSchema);
 
 const couchPotatoBBTQuestion = conn.couchPotato.model("question-1", questionSchema);
-// const couchPotatoKFQuestion = conn.couchPotato.model("question-2", questionSchema);
-// const couchPotatoGOTQuestion = conn.couchPotato.model("question-4", questionSchema);
-// const couchPotatoHPQuestion = conn.couchPotato.model("question-3", questionSchema);
-// const couchPotatoSuitsQuestion = conn.couchPotato.model("question-6", questionSchema);
-// const couchPotatoNarutoQuestion = conn.couchPotato.model("question-5", questionSchema);
+const couchPotatoKFQuestion = conn.couchPotato.model("question-2", questionSchema);
+const couchPotatoGOTQuestion = conn.couchPotato.model("question-4", questionSchema);
+const couchPotatoHPQuestion = conn.couchPotato.model("question-3", questionSchema);
+const couchPotatoSuitsQuestion = conn.couchPotato.model("question-6", questionSchema);
+const couchPotatoNarutoQuestion = conn.couchPotato.model("question-5", questionSchema);
 
-const xenatusBloodRelationQuestion = conn.xenatus.model("question-5", questionSchema);
-// const xenatusDiagramaticQuestion = conn.xenatus.model("question-4", questionSchema);
-// const xenatusNumericalQuestion = conn.xenatus.model("question-5", questionSchema);
-// const xenatusQuantitiveQuestion = conn.xenatus.model("question-1", questionSchema);
-// const xenatusLogicalQuestion = conn.xenatus.model("question-2", questionSchema);
+const xenatusBloodRelationQuestion = conn.xenatus.model("question-3", questionSchema);
+const xenatusDiagramaticQuestion = conn.xenatus.model("question-4", questionSchema);
+const xenatusNumericalQuestion = conn.xenatus.model("question-5", questionSchema);
+const xenatusQuantitiveQuestion = conn.xenatus.model("question-1", questionSchema);
+const xenatusLogicalQuestion = conn.xenatus.model("question-2", questionSchema);
 
 const c2cQuestionSet1 = conn.c2c.model("question-set-1", questionSchema);
 const c2cQuestionSet2 = conn.c2c.model("question-set-2", questionSchema);
@@ -70,12 +70,17 @@ const c2cQuestionSet3 = conn.c2c.model("question-set-3", questionSchema);
 
 module.exports = {
   couchPotatoBBTQuestion,
+  couchPotatoGOTQuestion,
+  couchPotatoHPQuestion,
+  couchPotatoKFQuestion,
+  couchPotatoNarutoQuestion,
+  couchPotatoSuitsQuestion,
   circuitronQuestion,
-  // xenatusQuestion,
+  xenatusLogicalQuestion,
   xenatusBloodRelationQuestion,
-  // xenatusDiagramaticQuestion,
-  // xenatusNumericalQuestion,
-  // xenatusQuantitiveQuestion,
+  xenatusDiagramaticQuestion,
+  xenatusNumericalQuestion,
+  xenatusQuantitiveQuestion,
   c2cQuestionSet1,
   c2cQuestionSet2,
   c2cQuestionSet3

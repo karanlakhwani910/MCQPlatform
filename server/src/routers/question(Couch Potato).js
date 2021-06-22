@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
 const auth = require("../middleware/auth");
-const {couchPotatoBBTQuestion} = require("../models/question");
+const {couchPotatoBBTQuestion,couchPotatoHPQuestion,couchPotatoSuitsQuestion,couchPotatoNarutoQuestion,couchPotatoKFQuestion,couchPotatoGOTQuestion} = require("../models/question");
 const {couchPotatoResponse} = require("../models/response");
 const {couchPotatoMainSiteUser} = require("../models/main-site-user");
 
@@ -59,67 +59,230 @@ const router = new express.Router();
 
 router.post("/fetchQuestions", async (req, res) => {
   try {
-    //const question=await Question.find({});
-    // console.log("inside end point",req.body.selectedSeries)
-    // var all=await couchPotatoResponse.find({});
-    // // console.log(all);
-    // var finalArray=[];
-    // var total=0
-    // var finalestArray=req.body.selectedSeries.reduce((total,value,index,array)=>{
-    //       if(value.Series==="GOT")
-    //       {
-    //         couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-    //           if (err) {
-    //             console.log(err);
-    //           } else {
-    //             console.log("results are");
-    //             console.log(results)
-    //             var newresults=results.map((question)=>{
-    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
-    //                 return question;
-    //             })
-    //             return newresults.concat(finalArray)
-    //             // console.log(newresults)
-    //           }
-    //         });
-    //       }
-    //       else if(value.Series==="Harry Potter")
-    //       {
-
-    //       }
-    //       else if(value.Series==="Kota")
-    //       {
-            
-    //       }
-    //       else if(value.Series==="Suits")
-    //       {
-
-    //       }
-    //       else if(value.Series==="TBBT")
-    //       {
-
-    //       }
-    //       else if(value.Series==="Naruto")
-    //       {
-
-    //       }
-          
-    // })
-    // res.status(200).send(finalestArray);
-
-    couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    console.log("inside end point",req.body.selectedSeries)
+    couchPotatoGOTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
+        if(req.body.selectedSeries.includes("GOT")){
+        
         var newresults=results.map((question)=>{
             question.correctAnswer=((question.correctAnswer+5)**7)%33;
                         return question;
         })
+        }
+        else{var newresults=[]}
+        console.log("value of new results is",newresults)
+        couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+            if(req.body.selectedSeries.includes("TBBT")){
+            var newresults2=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+            }
+            else{var newresults2=[]}
+            console.log("value of new results is",newresults2)
+            var finalarray=newresults.concat(newresults2);
+            couchPotatoHPQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+              if (err) {
+                console.log(err);
+              } else {
+                if(req.body.selectedSeries.includes("Harry Potter")){
+                var newresults3=results.map((question)=>{
+                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                return question;
+                })
+                }
+                else{var newresults3=[]}
+                console.log("value of new results is",newresults3)
+                var finalarray2=finalarray.concat(newresults3);
+                couchPotatoKFQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    if(req.body.selectedSeries.includes("Kota")){
+                    var newresults4=results.map((question)=>{
+                        question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                    return question;
+                    })
+                    }
+                    else{var newresults4=[]} 
+                    console.log("value of new results is",newresults4)
+                    var finalarray3=finalarray2.concat(newresults4)
+                    couchPotatoNarutoQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        if(req.body.selectedSeries.includes("Naruto")){
+                        var newresults5=results.map((question)=>{
+                            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                        return question;
+                        })
+                        }
+                        else{var newresults5=[]}
+                        console.log("value of new results is",newresults5)
+                        var finalarray4=finalarray3.concat(newresults5)
+                        couchPotatoSuitsQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                          if (err) {
+                            console.log(err);
+                          } else {
+                            if(req.body.selectedSeries.includes("Suits")){
+                            var newresults6=results.map((question)=>{
+                                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                            return question;
+                            })}
+                            else{var newresults6=[]}
+                            console.log("value of new results is",newresults6)
+                            var finalarray5=finalarray4.concat(newresults6)
+                // console.log("after adding value of new results",newresults,newresults2)
+                        console.log("finalest array",finalarray5)
+                        res.status(200).send(finalarray5);
+                      }
+                    })
+                  }
+                })
+              }
+              })    
+            }
+            })
+          }
 
+        })
         
-        res.status(200).send(newresults);
       }
+
     });
+    // var finalArray=[];
+    // await req.body.selectedSeries.forEach(async(item,index)=>{
+    //   console.log(index)
+    //       if(item.Series==="GOT")
+    //       {
+    //         await couchPotatoGOTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray)
+    //               res.status(200).send(finalArray);
+    //             }
+    //             // console.log(newresults)
+    //           }
+    //         });
+    //       }
+    //       else if(item.Series==="Harry Potter")
+    //       {
+    //         await couchPotatoHPQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray.length.length)
+    //               res.status(200).send(finalArray);
+    //             }
+    //           }
+    //         });
+    //       }
+    //       else if(item.Series==="Kota")
+    //       {
+    //         await couchPotatoKFQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray.length)
+    //               res.status(200).send(finalArray);
+    //             }
+    //           }
+    //         });
+    //       }
+    //       else if(item.Series==="Suits")
+    //       {
+    //         await couchPotatoSuitsQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray.length)
+    //               res.status(200).send(finalArray);
+    //             }
+    //           }
+    //         });
+    //       }
+    //       else if(item.Series==="TBBT")
+    //       {
+    //         await couchPotatoBBTQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else{
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray.length)
+    //               res.status(200).send(finalArray);
+    //             }
+    //           }
+    //         });
+    //       }
+    //       else if(item.Series==="Naruto")
+    //       {
+    //         await couchPotatoNarutoQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             var newresults=results.map((question)=>{
+    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
+    //                 return question;
+    //             })
+    //             finalArray=newresults.concat(finalArray)
+    //             // console.log(newresults)
+    //             if(index===3)
+    //             {
+    //               console.log("final array for index 3 is",finalArray.length)
+    //               res.status(200).send(finalArray);
+    //             }
+    //           }
+    //         });
+    //       }
+          
+    // })
+    // // 
+    // console.log("finalest array is",finalArray.length)
+    // res.status(200).send(finalArray);
   } catch (e) {
     console.log(e)
     res.status(400).send(e);

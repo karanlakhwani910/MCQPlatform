@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken")
 
 const auth = require("../middleware/auth");
-const {xenatusQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion,circuitronQuestion} = require("../models/question");
+const {xenatusLogicalQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion} = require("../models/question");
 const {xenatusResponse} = require("../models/response");
 const {xenatusMainSiteUser} = require("../models/main-site-user");
 
@@ -59,56 +59,7 @@ const router = new express.Router();
 
 router.post("/fetchQuestions", async (req, res) => {
   try {
-    //const question=await Question.find({});
-    // const questions=await xenatusQuantitiveQuestion.find({});
-    // const questions=await xenatusResponse.find({});
-    // console.log("response is logged",questions)
-    // var newresults;
-
-    // xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     var newresults=results.map((question)=>{
-    //         question.correctAnswer=((question.correctAnswer+5)**7)%33;
-    //                     return question;
-    //     })
-    //     console.log("value of new results is",newresults)
-    //     xenatusNumericalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-    //       if (err) {
-    //         console.log(err);
-    //       } else {
-    //         var newresults2=results.map((question)=>{
-    //             question.correctAnswer=((question.correctAnswer+5)**7)%33;
-    //                         return question;
-    //         })
-    //         console.log("value of new results is",newresults2)
-    //         var finalarray=newresults.concat(newresults2);
-    //         xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-    //           if (err) {
-    //             console.log(err);
-    //           } else {
-    //             var newresults3=results.map((question)=>{
-    //                 question.correctAnswer=((question.correctAnswer+5)**7)%33;
-    //                             return question;
-    //             })
-    //             console.log("value of new results is",newresults3)
-    //             var finalarray2=finalarray.concat(newresults3);
-                
-    //             // console.log("after adding value of new results",newresults,newresults2)
-    //             res.status(200).send(finalarray2);
-    //           }
-    
-    //         })
-    //       }
-
-    //     })
-        
-    //   }
-
-    // });
-
-    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 30 }, function (err, results) {
+    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -116,10 +67,63 @@ router.post("/fetchQuestions", async (req, res) => {
             question.correctAnswer=((question.correctAnswer+5)**7)%33;
                         return question;
         })
+        console.log("value of new results is",newresults)
+        xenatusNumericalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+            var newresults2=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+            console.log("value of new results is",newresults2)
+            var finalarray=newresults.concat(newresults2);
+            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+              if (err) {
+                console.log(err);
+              } else {
+                var newresults3=results.map((question)=>{
+                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                return question;
+                })
+                console.log("value of new results is",newresults3)
+                var finalarray2=finalarray.concat(newresults3);
+                xenatusDiagramaticQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    var newresults4=results.map((question)=>{
+                        question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                    return question;
+                    })
+                    console.log("value of new results is",newresults4)
+                    var finalarray3=finalarray2.concat(newresults4)
+                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        var newresults5=results.map((question)=>{
+                            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                        return question;
+                        })
+                        console.log("value of new results is",newresults5)
+                        var finalarray4=finalarray3.concat(newresults5)
+                // console.log("after adding value of new results",newresults,newresults2)
+                        res.status(200).send(finalarray4);
+                      }
+                    })
+                  }
+                })
+              }
+          
+    
+            })
+          }
 
+        })
         
-        res.status(200).send(newresults);
       }
+
     });
     
   }catch (e) {
@@ -205,7 +209,7 @@ router.post("/login", async (req, res) => {
     console.log("current date is",date.toLocaleString());
     const prevDate=new Date(2021, 5, 22, 8, 33, 30, 0);
     console.log("prev date is",prevDate.toLocaleString())
-    const nextDate=new Date(2021, 5, 22, 23, 59, 30, 0);
+    const nextDate=new Date(2021, 5, 23, 23, 59, 30, 0);
     console.log("next date is",nextDate.toLocaleString())
     // console.log("current compared to prev",prevDate<date,nextDate>date);
     

@@ -59,9 +59,13 @@ function Couchpotato({history,match}) {
                       onClick={() =>{ 
                           console.log(seriesRef.current.getSelectedItems());
                           var link = "/couchPotato/quiz/" + match.params.authToken + "/";
+                          var namesArray=seriesRef.current.getSelectedItems().map((item)=>{
+                            return item.Series
+                          })
+                          console.log(namesArray)
                           history.push({
                             pathname: link,
-                            state: { selectedSeries: seriesRef.current.getSelectedItems() }
+                            state: { selectedSeries: namesArray }
                           })
                         }}
                     >
