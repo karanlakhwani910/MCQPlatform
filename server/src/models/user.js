@@ -120,8 +120,8 @@ userSchema.methods.generateAuthToken=async function(){
 // })
 
 
-const couchPotatoUser = mongoose.model("User", userSchema);
-const circuitronUser=conn.circuitron.model("User",userSchema);
+const circuitronUser = mongoose.model("User", userSchema);
+const couchPotatoUser=conn.couchPotato.model("User",userSchema);
 const xenatusUser=conn.xenatus.model("User",userSchema);
 const c2cUser=conn.c2c.model("User",userSchema);
 

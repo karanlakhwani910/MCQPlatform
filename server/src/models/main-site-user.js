@@ -79,8 +79,8 @@ const MainSiteUserSchema = new mongoose.Schema(
 	}
 );
 
-const couchPotatoMainSiteUser = mongoose.model("main-site-user", MainSiteUserSchema);
-const circuitronMainSiteUser=conn.circuitron.model("main-site-user",MainSiteUserSchema);
+const circuitronMainSiteUser = mongoose.model("main-site-user", MainSiteUserSchema);
+const couchPotatoMainSiteUser=conn.couchPotato.model("main-site-user",MainSiteUserSchema);
 const xenatusMainSiteUser=conn.xenatus.model("main-site-user",MainSiteUserSchema);
 const c2cMainSiteUser=conn.c2c.model("main-site-user",MainSiteUserSchema);
 
