@@ -30,7 +30,7 @@ import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq/mcq.component";
-import TimerComponent from "../../components/timer/timer.component";
+import TimerComponent from "../../components/timer-c2c/timer.component";
 import Loader from "../../components/loader/loader.component";
 import TemporaryDrawer from "../../components/drawer/TemporaryDrawer";
 

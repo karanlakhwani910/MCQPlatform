@@ -121,7 +121,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 600;
+var time = 1800;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {
@@ -188,7 +188,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '60m'
+      expiresIn: '31m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()

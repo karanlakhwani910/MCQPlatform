@@ -59,7 +59,7 @@ const router = new express.Router();
 
 router.post("/fetchQuestions", async (req, res) => {
   try {
-    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -68,7 +68,7 @@ router.post("/fetchQuestions", async (req, res) => {
                         return question;
         })
         console.log("value of new results is",newresults)
-        xenatusNumericalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+        xenatusNumericalQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
           if (err) {
             console.log(err);
           } else {
@@ -78,7 +78,7 @@ router.post("/fetchQuestions", async (req, res) => {
             })
             console.log("value of new results is",newresults2)
             var finalarray=newresults.concat(newresults2);
-            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
               if (err) {
                 console.log(err);
               } else {
@@ -98,7 +98,7 @@ router.post("/fetchQuestions", async (req, res) => {
                     })
                     console.log("value of new results is",newresults4)
                     var finalarray3=finalarray2.concat(newresults4)
-                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
                       if (err) {
                         console.log(err);
                       } else {
@@ -163,7 +163,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 600;
+var time = 1800;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {
@@ -234,7 +234,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '60m'
+      expiresIn: '31m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()

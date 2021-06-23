@@ -26,7 +26,7 @@ import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq-couchPotato/mcq.component";
-import TimerComponent from "../../components/timer/timer.component";
+import TimerComponent from "../../components/timer-couchPotato/timer.component";
 import Loader from "../../components/loader/loader.component";
 import TemporaryDrawer from "../../components/drawer-couchPotato/TemporaryDrawer";
 
@@ -52,12 +52,24 @@ class QuizPageCP extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
-    // if(this.firstTime===false)
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 25, 12, 15, 0, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 25, 13, 0, 0, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+    // // console.log("current compared to prev",prevDate<date,nextDate>date);
+    
+    // if(!(date>prevDate&&date<nextDate))
     // {
-    //   this.firstTime=true;
-    //   Location.reload(false)
-
+    //   this.props.history.push("/")
     // }
+    if(this.firstTime===false)
+    {
+      this.firstTime=true;
+      Location.reload(false)
+
+    }
     if (this.props.questionsCouchPotato.length === 0) {
       axios
         .post("http://localhost:3001/couchPotato/fetchQuestions",{selectedSeries:this.props.location.state.selectedSeries})
@@ -321,7 +333,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFetchedQuestionsToStateCouchPotato: (questions) =>
     dispatch(setFetchedQuestionsToStateCouchPotato(questions)),
   selectedQuestionNextCouchPotato: (num) => {
-    if (num === 4) {
+    if (num === 79) {
     } else {
       dispatch(selectedQuestionNextCouchPotato(num));
     }

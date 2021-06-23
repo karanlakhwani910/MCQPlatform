@@ -26,7 +26,7 @@ import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq-circuitron/mcq.component";
-import TimerComponent from "../../components/timer/timer.component";
+import TimerComponent from "../../components/timer-circuitron/timer.component";
 import Loader from "../../components/loader/loader.component";
 import TemporaryDrawer from "../../components/drawer-circuitron/TemporaryDrawer";
 
@@ -57,6 +57,18 @@ class QuizPageCircuitRon extends Component {
     //   this.firstTime=true;
     //   Location.reload(false)
 
+    // }
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 25, 13, 15, 0, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 25, 14, 0, 0, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+    // // console.log("current compared to prev",prevDate<date,nextDate>date);
+    
+    // if(!(date>prevDate&&date<nextDate))
+    // {
+    //   this.props.history.push("/")
     // }
     if (this.props.questionsCircuitron.length === 0) {
       axios

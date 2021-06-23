@@ -32,7 +32,7 @@ class ThankyouPage extends React.Component{
                 lorem ipsom dolor sit amet
               </Typography> */}
               <Typography variant="h3" className="subheading">
-                Your score is {this.props.location.state.score}
+                Your result {this.props.location.state.score}
               </Typography>
             </div>
           </div>

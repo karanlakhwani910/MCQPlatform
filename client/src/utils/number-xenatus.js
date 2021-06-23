@@ -1,7 +1,7 @@
 // import React from "react";
 // const number = [];
 var myAssociate = [];
-for (var i = 1; i <= 25; i++) {
+for (var i = 1; i <= 35; i++) {
   var newElement = {};
   newElement["id"] = i;
   newElement["num"] = i;

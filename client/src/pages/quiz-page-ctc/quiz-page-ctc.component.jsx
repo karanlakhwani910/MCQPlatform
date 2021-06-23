@@ -1,4 +1,4 @@
-//prev,next max limits hardcoded change.
+//uncomment slot in component did mount
 
 import React, { Component } from "react";
 import axios from "axios";
@@ -26,7 +26,7 @@ import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq-c2c/mcq.component";
-import TimerComponent from "../../components/timer/timer.component";
+import TimerComponent from "../../components/timer-c2c/timer.component";
 import Loader from "../../components/loader/loader.component";
 import TemporaryDrawer from "../../components/drawer-c2c/TemporaryDrawer";
 
@@ -52,6 +52,19 @@ class QuizPageCTC extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
+    //uncomment for slot 
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 25, 18, 30, 0, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 25, 19, 0, 0, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+    // // console.log("current compared to prev",prevDate<date,nextDate>date);
+    
+    // if(!(date>prevDate&&date<nextDate))
+    // {
+    //   this.props.history.push("/")
+    // }
     // if(this.firstTime===false)
     // {
     //   this.firstTime=true;

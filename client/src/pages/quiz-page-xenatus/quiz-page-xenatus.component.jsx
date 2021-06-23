@@ -26,7 +26,7 @@ import "./quiz-page.styles.scss";
 
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq-xenatus/mcq.component";
-import TimerComponent from "../../components/timer/timer.component";
+import TimerComponent from "../../components/timer-xenatus/timer.component";
 import Loader from "../../components/loader/loader.component";
 import TemporaryDrawer from "../../components/drawer-xenatus/TemporaryDrawer";
 
@@ -58,6 +58,24 @@ class QuizPageXenatus extends Component {
     //   Location.reload(false)
 
     // }
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 25, 22, 0, 0, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 25, 22, 30, 0, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+    // // console.log("current compared to prev",prevDate<date,nextDate>date);
+    
+    // if(!(date>prevDate&&date<nextDate))
+    // {
+    //   this.props.history.push("/")
+    // }
+    if(this.firstTime===false)
+    {
+      this.firstTime=true;
+      Location.reload(false)
+
+    }
     if (this.props.questionsXenatus.length === 0) {
       axios
         .post("http://localhost:3001/xenatus/fetchQuestions")
@@ -321,7 +339,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFetchedQuestionsToStateXenatus: (questions) =>
     dispatch(setFetchedQuestionsToStateXenatus(questions)),
   selectedQuestionNextXenatus: (num) => {
-    if (num === 4) {
+    if (num === 34) {
     } else {
       dispatch(selectedQuestionNextXenatus(num));
     }
