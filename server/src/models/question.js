@@ -64,6 +64,13 @@ const xenatusNumericalQuestion = conn.xenatus.model("question-5", questionSchema
 const xenatusQuantitiveQuestion = conn.xenatus.model("question-1", questionSchema);
 const xenatusLogicalQuestion = conn.xenatus.model("question-2", questionSchema);
 
+const xenatusBloodRelationQuestion2 = conn.xenatus.model("question-8", questionSchema);
+const xenatusDiagramaticQuestion2 = conn.xenatus.model("question-9", questionSchema);
+const xenatusNumericalQuestion2 = conn.xenatus.model("question-10", questionSchema);
+const xenatusQuantitiveQuestion2 = conn.xenatus.model("question-6", questionSchema);
+const xenatusLogicalQuestion2 = conn.xenatus.model("question-7", questionSchema);
+
+
 const c2cQuestionSet1 = conn.c2c.model("question-set-1", questionSchema);
 const c2cQuestionSet2 = conn.c2c.model("question-set-2", questionSchema);
 const c2cQuestionSet3 = conn.c2c.model("question-set-3", questionSchema);
@@ -81,6 +88,11 @@ module.exports = {
   xenatusDiagramaticQuestion,
   xenatusNumericalQuestion,
   xenatusQuantitiveQuestion,
+  xenatusLogicalQuestion2,
+  xenatusBloodRelationQuestion2,
+  xenatusDiagramaticQuestion2,
+  xenatusNumericalQuestion2,
+  xenatusQuantitiveQuestion2,
   c2cQuestionSet1,
   c2cQuestionSet2,
   c2cQuestionSet3

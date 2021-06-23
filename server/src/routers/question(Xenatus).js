@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken")
 
 const auth = require("../middleware/auth");
-const {xenatusLogicalQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion} = require("../models/question");
+const {xenatusLogicalQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion,xenatusLogicalQuestion2,xenatusBloodRelationQuestion2,xenatusNumericalQuestion2,xenatusDiagramaticQuestion2,xenatusQuantitiveQuestion2} = require("../models/question");
 const {xenatusResponse} = require("../models/response");
 const {xenatusMainSiteUser} = require("../models/main-site-user");
 
@@ -59,7 +59,7 @@ const router = new express.Router();
 
 router.post("/fetchQuestions", async (req, res) => {
   try {
-    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
+    xenatusBloodRelationQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -68,7 +68,7 @@ router.post("/fetchQuestions", async (req, res) => {
                         return question;
         })
         console.log("value of new results is",newresults)
-        xenatusNumericalQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
+        xenatusNumericalQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
           if (err) {
             console.log(err);
           } else {
@@ -78,7 +78,7 @@ router.post("/fetchQuestions", async (req, res) => {
             })
             console.log("value of new results is",newresults2)
             var finalarray=newresults.concat(newresults2);
-            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
+            xenatusQuantitiveQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
               if (err) {
                 console.log(err);
               } else {
@@ -88,7 +88,7 @@ router.post("/fetchQuestions", async (req, res) => {
                 })
                 console.log("value of new results is",newresults3)
                 var finalarray2=finalarray.concat(newresults3);
-                xenatusDiagramaticQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                xenatusDiagramaticQuestion2.findRandom({}, {}, { limit: 5 }, function (err, results) {
                   if (err) {
                     console.log(err);
                   } else {
@@ -98,7 +98,7 @@ router.post("/fetchQuestions", async (req, res) => {
                     })
                     console.log("value of new results is",newresults4)
                     var finalarray3=finalarray2.concat(newresults4)
-                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
+                    xenatusLogicalQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
                       if (err) {
                         console.log(err);
                       } else {
