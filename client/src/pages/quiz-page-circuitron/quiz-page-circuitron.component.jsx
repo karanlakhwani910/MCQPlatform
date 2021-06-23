@@ -50,14 +50,11 @@ class QuizPageCircuitRon extends Component {
     };
   }
   componentDidMount() {
+    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
-    // if(this.firstTime===false)
-    // {
-    //   this.firstTime=true;
-    //   Location.reload(false)
 
-    // }
     // const date=new Date();
     // console.log("current date is",date.toLocaleString());
     // const prevDate=new Date(2021, 5, 25, 13, 30, 0, 0);

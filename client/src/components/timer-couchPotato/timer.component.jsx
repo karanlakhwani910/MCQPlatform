@@ -21,10 +21,10 @@ const Timer = ({fetchedTime,setRecentFetchedTime}) => {
     // {
     //   setRecentFetchedTime()
     // }
-    if(counter===1208)
-    {
-      window.location.reload();
-    }
+    // if(counter===1208)
+    // {
+    //   window.location.reload();
+    // }
     if(counter===5)
     {
       setRecentFetchedTime(0);

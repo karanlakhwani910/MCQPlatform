@@ -27,7 +27,7 @@ import "./quiz-page.styles.scss";
 //import GridComponent from "../../components/grid/grid.component";
 import McqComponent from "../../components/mcq-couchPotato/mcq.component";
 import TimerComponent from "../../components/timer-couchPotato/timer.component";
-import Loader from "../../components/loader/loader.component";
+import Loader from "../../components/loader-couchPotato/loader.component";
 import TemporaryDrawer from "../../components/drawer-couchPotato/TemporaryDrawer";
 
 import Button from "@material-ui/core/Button";
@@ -52,6 +52,7 @@ class QuizPageCP extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
+    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
     // const date=new Date();
     // console.log("current date is",date.toLocaleString());
     // const prevDate=new Date(2021, 5, 25, 12, 30, 0, 0);
@@ -64,12 +65,6 @@ class QuizPageCP extends Component {
     // {
     //   this.props.history.push("/")
     // }
-    if(this.firstTime===false)
-    {
-      this.firstTime=true;
-      Location.reload(false)
-
-    }
     if (this.props.questionsCouchPotato.length === 0) {
       axios
         .post("http://localhost:3001/couchPotato/fetchQuestions",{selectedSeries:this.props.location.state.selectedSeries})
@@ -179,7 +174,7 @@ class QuizPageCP extends Component {
             </div>
             <div className="row row2">
               <div className="col-lg-2.5 col-md-3 col-sm-11 "></div>
-              <div className="col-lg-7 col-md-7 col-sm-1">
+              {/* <div className="col-lg-7 col-md-7 col-sm-1">
                 <Wrapper>
                   <div className="row row1">
                     <ButtonGroup>
@@ -219,6 +214,46 @@ class QuizPageCP extends Component {
                     </ButtonGroup>
                   </div>
                 </Wrapper>
+              </div> */}
+              <div
+                style={{
+                  display: "flex",
+                  flexFlow: "column",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <div
+                  
+                  className="question-button-group"
+                >
+                  <button
+                    onClick={() => {
+                      this.props.selectedQuestionPreviousCouchPotato(
+                        this.props.selectedQuestionNumberCouchPotato
+                      );
+                      console.log(this.props);
+                    }}
+                  >
+                    PREVIOUS
+                  </button>
+                  <button
+                    onClick={() =>
+                      this.submit(this, this.props.questionsCouchPotato)
+                    }
+                  >
+                    SUBMIT
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.props.selectedQuestionNextCouchPotato(
+                        this.props.selectedQuestionNumberCouchPotato
+                      );
+                    }}
+                  >
+                    NEXT
+                  </button>
+                </div>
               </div>
             </div>
           </div>

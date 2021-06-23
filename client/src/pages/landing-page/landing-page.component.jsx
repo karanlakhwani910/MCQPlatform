@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {withRouter} from "react-router-dom";
 
 import "./landing-page.styles.scss";
@@ -13,6 +13,9 @@ import Xenia21_Logo from "../../assets/Xenia21_Text.png";
 // import xeNatus from "../../assets/xeNatus.png";
 
 function LandingPage() {
+  useEffect(()=>{
+    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+})
   return (
     <div>
       {/* <Navbar className='nav-bar' variant="dark">

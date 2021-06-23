@@ -48,8 +48,9 @@ const Login = ({ history }) => {
   var [severity, setSeverity] = React.useState(""); //success,error,warning,info
   var [message, setMessage] = React.useState(""); //change message
   const [eventname, setEventname] = React.useState("");
-  const onClickFunction = () => {
+  const onClickFunction = (e) => {
     // console.log("event ref value is",eventRef.current.value,"eventName is",eventname)
+    e.preventDefault();
     axios
       .post(`http://localhost:3001/${eventname}/login`, {
         username: usernameRef.current.value,
@@ -152,7 +153,7 @@ const Login = ({ history }) => {
           size="md"
           type="submit"
           className="buttonStyle"
-          onClick={() => onClickFunction()}
+          onClick={(e) => onClickFunction(e)}
         >
           {/* <Button variant="dark" size="md" type="submit" onClick={handleClick}> */}
           Login

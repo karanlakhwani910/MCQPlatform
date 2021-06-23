@@ -321,7 +321,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 1210;
+var time = 1200;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {

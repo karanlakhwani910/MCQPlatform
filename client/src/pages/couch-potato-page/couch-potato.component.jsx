@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Multiselect } from "multiselect-react-dropdown";
 // import { withRouter } from "react-router-dom";
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Couchpotato({ history, match }) {
+  useEffect(()=>{
+    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+  })
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

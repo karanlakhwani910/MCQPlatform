@@ -52,6 +52,8 @@ class QuizPageXenatus extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
+    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+
     // if(this.firstTime===false)
     // {
     //   this.firstTime=true;
@@ -70,12 +72,6 @@ class QuizPageXenatus extends Component {
     // {
     //   this.props.history.push("/")
     // }
-    if(this.firstTime===false)
-    {
-      this.firstTime=true;
-      Location.reload(false)
-
-    }
     if (this.props.questionsXenatus.length === 0) {
       axios
         .post("http://localhost:3001/xenatus/fetchQuestions")
@@ -185,7 +181,7 @@ class QuizPageXenatus extends Component {
             </div>
             <div className="row row2">
               <div className="col-lg-2.5 col-md-3 col-sm-11 "></div>
-              <div className="col-lg-7 col-md-7 col-sm-1">
+              {/* <div className="col-lg-7 col-md-7 col-sm-1">
                 <Wrapper>
                   <div className="row row1">
                     <ButtonGroup>
@@ -225,6 +221,46 @@ class QuizPageXenatus extends Component {
                     </ButtonGroup>
                   </div>
                 </Wrapper>
+              </div> */}
+              <div
+                style={{
+                  display: "flex",
+                  flexFlow: "column",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <div
+                  
+                  className="question-button-group"
+                >
+                  <button
+                    onClick={() => {
+                      this.props.selectedQuestionPreviousXenatus(
+                        this.props.selectedQuestionNumberXenatus
+                      );
+                      console.log(this.props);
+                    }}
+                  >
+                    PREVIOUS
+                  </button>
+                  <button
+                    onClick={() =>
+                      this.submit(this, this.props.questionsXenatus)
+                    }
+                  >
+                    SUBMIT
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.props.selectedQuestionNextXenatus(
+                        this.props.selectedQuestionNumberXenatus
+                      );
+                    }}
+                  >
+                    NEXT
+                  </button>
+                </div>
               </div>
             </div>
           </div>
