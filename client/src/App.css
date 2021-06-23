@@ -1,5 +1,20 @@
+@font-face {
+  font-family: 'Barlow';
+  src: url('./assets/Barlow-Light.ttf');
+}
+
+@font-face {
+  font-family: 'SansBold';
+  src: url('./assets/OpenSans-SemiBold.ttf');
+}
+
 .App {
   text-align: center;
+  overflow-x: hidden;
+}
+
+#root{
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -28,11 +43,92 @@
   color: #61dafb;
 }
 
+.container-fluid{
+  background-image: none !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* New styles */
+
+.Leftspace{
+  width: 100% !important;
+}
+
+.number-box{
+  left: -10px !important;
+  padding-bottom: 15px !important;
+}
+
+.timer{
+  margin-top: 70px !important;
+}
+
+
+
+.intruction-div p{
+  font-family: 'Barlow';
+}
+
+.intruction-div h1{
+  font-family: 'SansBold';
+}
+
+.login{
+  height: auto;
+  margin: 5% auto !important;
+  background-color: rgb(88, 12, 88) !important;
+}
+
+.intruction-div{
+  background-color: rgb(88, 12, 88) !important;
+}
+
+.question>div{
+  width: auto !important;
+}
+
+.question{
+  margin: auto 0 auto auto !important;
+}
+
+#standard-multiline-flexible{
+  padding-right: 5px;
+  font-family: 'Barlow';
+}
+
+#standard-multiline-flexible::-webkit-scrollbar {
+  width: 5px;               /* width of the entire scrollbar */
+}
+#standard-multiline-flexible::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+#standard-multiline-flexible::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #b7a4fa;  /* creates padding around scroll thumb */
+}
+#root::-webkit-scrollbar {
+  width: 5px;               /* width of the entire scrollbar */
+}
+#root::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+#root::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #b7a4fa;  /* creates padding around scroll thumb */
+}
+
+@media (max-width:600px){
+  .timer{
+    margin-top: 0 !important;
   }
 }
