@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./App.css";
 import React, { useState, useEffect, useRef } from 'react'
-import NET from './vanta.net.min.js';
+import NET from './vanta.net.js';
 
 import { Switch, Route } from "react-router-dom";
 import QuizPage from "./pages/quiz-page/quiz-page.component";
