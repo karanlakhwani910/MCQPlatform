@@ -103,6 +103,7 @@ function Couchpotato({ history, match }) {
                     <Multiselect
                       ref={seriesRef}
                       options={options}
+                      style={{ backgroundColor: "#15152D" }}
                       displayValue="Series"
                       selectionLimit="4"
                       className="Multiselectsytles"

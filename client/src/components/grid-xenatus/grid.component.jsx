@@ -84,14 +84,7 @@ const Wrapper = styled.section`
     padding-left: 0%;
     min-height: 100%;
     width: 100%;
-    background-image: linear-gradient(
-      to bottom,
-      #1e1a33,
-      #191540,
-      #292a5d,
-      #5f5c8f,
-      #635f8f
-    );
+    background:#23153c;
 
     clear: both;
     overflow-x: hidden; /* Hide horizontal scrollbar */
@@ -141,8 +134,8 @@ const Wrapper = styled.section`
   }
   .small-rectangle-red {
     background-color: var(--explorebtn);
-    background-color: #0255a3;
-    box-shadow: 1px 1px 2px black, 0 0 20px #0255a3, 0 0 5px darkblue;
+    background-color: #909fad;
+    box-shadow: 1px 1px 2px black, 0 0 20px #909fad, 0 0 5px darkblue;
     height: 62px;
     width: 65px;
     border: none;
@@ -153,9 +146,9 @@ const Wrapper = styled.section`
     margin-left: 4%;
     &:hover {
       background: black;
-      border: 4px solid #0255a3;
-      color: #0255a3;
-      box-shadow: 1px 1px 2px black, 0 0 45px #0255a3, 0 0 5px darkblue;
+      border: 4px solid #909fad;
+      color: #909fad;
+      box-shadow: 1px 1px 2px black, 0 0 45px #909fad, 0 0 5px darkblue;
     }
     h4 {
       margin-top: 20%;
@@ -203,24 +196,20 @@ const Wrapper = styled.section`
 const StyledButton = styled(Button)`
   &:not(:hover) {
     background: ${(props) =>
-      props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
-    box-shadow: 1px 1px 2px black,
-      0 0 20px
-        ${(props) =>
-          props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"},
-      0 0 5px darkblue;
+      props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
+    
   }
   &:hover {
     background: black;
     border: 4px solid
       ${(props) =>
-        props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
+        props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
     color: ${(props) =>
-      props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
+      props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
     box-shadow: 1px 1px 2px black,
       0 0 45px
         ${(props) =>
-          props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"},
+          props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"},
       0 0 5px darkblue;
   }
 `;

@@ -52,7 +52,7 @@ const Login = ({ history }) => {
     // console.log("event ref value is",eventRef.current.value,"eventName is",eventname)
     e.preventDefault();
     axios
-      .post(`http://api.xeniamcq.co.in/${eventname}/login`, {
+      .post(`http://localhost:3001/${eventname}/login`, {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       })

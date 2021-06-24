@@ -59,7 +59,7 @@ const router = new express.Router();
 
 router.post("/fetchQuestions", async (req, res) => {
   try {
-    xenatusBloodRelationQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -68,7 +68,7 @@ router.post("/fetchQuestions", async (req, res) => {
                         return question;
         })
         console.log("value of new results is",newresults)
-        xenatusNumericalQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+        xenatusNumericalQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
           if (err) {
             console.log(err);
           } else {
@@ -78,7 +78,7 @@ router.post("/fetchQuestions", async (req, res) => {
             })
             console.log("value of new results is",newresults2)
             var finalarray=newresults.concat(newresults2);
-            xenatusQuantitiveQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
               if (err) {
                 console.log(err);
               } else {
@@ -88,7 +88,7 @@ router.post("/fetchQuestions", async (req, res) => {
                 })
                 console.log("value of new results is",newresults3)
                 var finalarray2=finalarray.concat(newresults3);
-                xenatusDiagramaticQuestion2.findRandom({}, {}, { limit: 5 }, function (err, results) {
+                xenatusDiagramaticQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
                   if (err) {
                     console.log(err);
                   } else {
@@ -98,7 +98,7 @@ router.post("/fetchQuestions", async (req, res) => {
                     })
                     console.log("value of new results is",newresults4)
                     var finalarray3=finalarray2.concat(newresults4)
-                    xenatusLogicalQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
                       if (err) {
                         console.log(err);
                       } else {
@@ -126,7 +126,78 @@ router.post("/fetchQuestions", async (req, res) => {
 
     });
     
-  }catch (e) {
+  }
+  //ROUND 2
+  // try {
+  //   xenatusBloodRelationQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       var newresults=results.map((question)=>{
+  //           question.correctAnswer=((question.correctAnswer+5)**7)%33;
+  //                       return question;
+  //       })
+  //       console.log("value of new results is",newresults)
+  //       xenatusNumericalQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+  //         if (err) {
+  //           console.log(err);
+  //         } else {
+  //           var newresults2=results.map((question)=>{
+  //               question.correctAnswer=((question.correctAnswer+5)**7)%33;
+  //                           return question;
+  //           })
+  //           console.log("value of new results is",newresults2)
+  //           var finalarray=newresults.concat(newresults2);
+  //           xenatusQuantitiveQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+  //             if (err) {
+  //               console.log(err);
+  //             } else {
+  //               var newresults3=results.map((question)=>{
+  //                   question.correctAnswer=((question.correctAnswer+5)**7)%33;
+  //                               return question;
+  //               })
+  //               console.log("value of new results is",newresults3)
+  //               var finalarray2=finalarray.concat(newresults3);
+  //               xenatusDiagramaticQuestion2.findRandom({}, {}, { limit: 5 }, function (err, results) {
+  //                 if (err) {
+  //                   console.log(err);
+  //                 } else {
+  //                   var newresults4=results.map((question)=>{
+  //                       question.correctAnswer=((question.correctAnswer+5)**7)%33;
+  //                                   return question;
+  //                   })
+  //                   console.log("value of new results is",newresults4)
+  //                   var finalarray3=finalarray2.concat(newresults4)
+  //                   xenatusLogicalQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+  //                     if (err) {
+  //                       console.log(err);
+  //                     } else {
+  //                       var newresults5=results.map((question)=>{
+  //                           question.correctAnswer=((question.correctAnswer+5)**7)%33;
+  //                                       return question;
+  //                       })
+  //                       console.log("value of new results is",newresults5)
+  //                       var finalarray4=finalarray3.concat(newresults5)
+  //               // console.log("after adding value of new results",newresults,newresults2)
+  //                       res.status(200).send(finalarray4);
+  //                     }
+  //                   })
+  //                 }
+  //               })
+  //             }
+          
+    
+  //           })
+  //         }
+
+  //       })
+        
+  //     }
+
+  //   });
+    
+  // }
+  catch (e) {
     res.status(400).send(e);
   }
 });

@@ -58,6 +58,13 @@ const couchPotatoHPQuestion = conn.couchPotato.model("question-3", questionSchem
 const couchPotatoSuitsQuestion = conn.couchPotato.model("question-6", questionSchema);
 const couchPotatoNarutoQuestion = conn.couchPotato.model("question-5", questionSchema);
 
+// const couchPotatoBBTQuestion = conn.couchPotato2.model("question-1", questionSchema);
+// const couchPotatoKFQuestion = conn.couchPotato2.model("question-2", questionSchema);
+// const couchPotatoGOTQuestion = conn.couchPotato2.model("question-4", questionSchema);
+// const couchPotatoHPQuestion = conn.couchPotato2.model("question-3", questionSchema);
+// const couchPotatoSuitsQuestion = conn.couchPotato2.model("question-6", questionSchema);
+// const couchPotatoNarutoQuestion = conn.couchPotato2.model("question-5", questionSchema);
+
 const xenatusBloodRelationQuestion = conn.xenatus.model("question-3", questionSchema);
 const xenatusDiagramaticQuestion = conn.xenatus.model("question-4", questionSchema);
 const xenatusNumericalQuestion = conn.xenatus.model("question-5", questionSchema);

@@ -31,7 +31,7 @@ class AnswerComponent extends Component {
 
     // Request made to the backend api
     // Send formData object
-    // axios.post("api.xeniamcq.co.in/uploadfile", formData); <<<<<<<<<<<<<<<<<<<UNCOMMENT HERE>>>>>>>>
+    // axios.post("localhost:3001/uploadfile", formData); <<<<<<<<<<<<<<<<<<<UNCOMMENT HERE>>>>>>>>
   };
 
   // File content to be displayed after

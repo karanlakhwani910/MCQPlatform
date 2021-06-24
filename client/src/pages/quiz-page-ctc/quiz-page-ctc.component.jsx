@@ -72,7 +72,7 @@ class QuizPageCTC extends Component {
     // }
     if (this.props.questionsC2c.length === 0) {
       axios
-        .post("http://api.xeniamcq.co.in/c2c/fetchQuestions")
+        .post("http://localhost:3001/c2c/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
@@ -90,7 +90,7 @@ class QuizPageCTC extends Component {
     }
     console.log(this.props);
     var link =
-      "http://api.xeniamcq.co.in/c2c/getTime/" +
+      "http://localhost:3001/c2c/getTime/" +
       this.props.match.params.authToken;
     console.log(link);
     axios
@@ -131,7 +131,7 @@ class QuizPageCTC extends Component {
     console.log("submit clicked");
     console.log("body while sending is", response);
     var link =
-      "http://api.xeniamcq.co.in/c2c/saveResponse/" +
+      "http://localhost:3001/c2c/saveResponse/" +
       reference.props.match.params.authToken;
     axios
       .post(link, response)

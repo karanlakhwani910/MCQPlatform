@@ -141,8 +141,8 @@
 //   }
 //   .small-rectangle-red {
 //     background-color: var(--explorebtn);
-//     background-color: #0255a3;
-//     box-shadow: 1px 1px 2px black, 0 0 20px #0255a3, 0 0 5px darkblue;
+//     background-color: #909fad;
+//     box-shadow: 1px 1px 2px black, 0 0 20px #909fad, 0 0 5px darkblue;
 //     height: 62px;
 //     width: 65px;
 //     border: none;
@@ -153,9 +153,9 @@
 //     margin-left: 4%;
 //     &:hover {
 //       background: black;
-//       border: 4px solid #0255a3;
-//       color: #0255a3;
-//       box-shadow: 1px 1px 2px black, 0 0 45px #0255a3, 0 0 5px darkblue;
+//       border: 4px solid #909fad;
+//       color: #909fad;
+//       box-shadow: 1px 1px 2px black, 0 0 45px #909fad, 0 0 5px darkblue;
 //     }
 //     h4 {
 //       margin-top: 20%;
@@ -203,24 +203,24 @@
 // const StyledButton = styled(Button)`
 //   &:not(:hover) {
 //     background: ${(props) =>
-//       props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
+//       props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
 //     box-shadow: 1px 1px 2px black,
 //       0 0 20px
 //         ${(props) =>
-//           props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"},
+//           props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"},
 //       0 0 5px darkblue;
 //   }
 //   &:hover {
 //     background: black;
 //     border: 4px solid
 //       ${(props) =>
-//         props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
+//         props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
 //     color: ${(props) =>
-//       props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"};
+//       props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"};
 //     box-shadow: 1px 1px 2px black,
 //       0 0 45px
 //         ${(props) =>
-//           props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#0255a3"},
+//           props.selected ? "rgb(78,0,220)" : props.marked ? "rgb(185,56,168)" : "#909fad"},
 //       0 0 5px darkblue;
 //   }
 // `;

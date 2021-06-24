@@ -26,7 +26,7 @@ function Instructions() {
             <StopIcon style={{ color: "rgb(185,56,168)" }} /> indicates that the question is solved
           </li>
           <li>
-            <StopIcon style={{ color: "#0255a3" }} /> indicates that the question is not solved
+            <StopIcon style={{ color: "#909fad" }} /> indicates that the question is not solved
           </li>
         </ol>
       </p>
