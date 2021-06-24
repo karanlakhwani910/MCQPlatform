@@ -50,7 +50,10 @@ class QuizPageCircuitRon extends Component {
     };
   }
   componentDidMount() {
-    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener("popstate", function (event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
 
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
@@ -62,14 +65,14 @@ class QuizPageCircuitRon extends Component {
     // const nextDate=new Date(2021, 5, 25, 14, 0, 0, 0);
     // console.log("next date is",nextDate.toLocaleString())
     // // console.log("current compared to prev",prevDate<date,nextDate>date);
-    
+
     // if(!(date>prevDate&&date<nextDate))
     // {
     //   this.props.history.push("/")
     // }
     if (this.props.questionsCircuitron.length === 0) {
       axios
-        .post("http://localhost:3001/circuitron/fetchQuestions")
+        .post("http://api.xeniamcq.co.in/circuitron/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
@@ -87,7 +90,8 @@ class QuizPageCircuitRon extends Component {
     }
     console.log(this.props);
     var link =
-      "http://localhost:3001/circuitron/getTime/" + this.props.match.params.authToken;
+      "http://api.xeniamcq.co.in/circuitron/getTime/" +
+      this.props.match.params.authToken;
     console.log(link);
     axios
       .post(link)
@@ -127,7 +131,7 @@ class QuizPageCircuitRon extends Component {
     console.log("submit clicked");
     console.log("body while sending is", response);
     var link =
-      "http://localhost:3001/circuitron/saveResponse/" +
+      "http://api.xeniamcq.co.in/circuitron/saveResponse/" +
       reference.props.match.params.authToken;
     axios
       .post(link, response)
@@ -225,10 +229,7 @@ class QuizPageCircuitRon extends Component {
                   width: "100%",
                 }}
               >
-                <div
-                  
-                  className="question-button-group"
-                >
+                <div className="question-button-group">
                   <button
                     onClick={() => {
                       this.props.selectedQuestionPreviousCircuitron(
@@ -381,7 +382,8 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(selectedQuestionPreviousCircuitron(num));
     }
   },
-  setSelectedQuestionCircuitron: (num) => dispatch(setSelectedQuestionCircuitron(num)),
+  setSelectedQuestionCircuitron: (num) =>
+    dispatch(setSelectedQuestionCircuitron(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 

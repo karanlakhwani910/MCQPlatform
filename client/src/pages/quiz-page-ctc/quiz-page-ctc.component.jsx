@@ -52,9 +52,12 @@ class QuizPageCTC extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
-    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener("popstate", function (event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
 
-    //uncomment for slot 
+    //uncomment for slot
     // const date=new Date();
     // console.log("current date is",date.toLocaleString());
     // const prevDate=new Date(2021, 5, 25, 18, 30, 0, 0);
@@ -62,14 +65,14 @@ class QuizPageCTC extends Component {
     // const nextDate=new Date(2021, 5, 25, 19, 0, 0, 0);
     // console.log("next date is",nextDate.toLocaleString())
     // // console.log("current compared to prev",prevDate<date,nextDate>date);
-    
+
     // if(!(date>prevDate&&date<nextDate))
     // {
     //   this.props.history.push("/")
     // }
     if (this.props.questionsC2c.length === 0) {
       axios
-        .post("http://localhost:3001/c2c/fetchQuestions")
+        .post("http://api.xeniamcq.co.in/c2c/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
@@ -87,7 +90,8 @@ class QuizPageCTC extends Component {
     }
     console.log(this.props);
     var link =
-      "http://localhost:3001/c2c/getTime/" + this.props.match.params.authToken;
+      "http://api.xeniamcq.co.in/c2c/getTime/" +
+      this.props.match.params.authToken;
     console.log(link);
     axios
       .post(link)
@@ -127,7 +131,7 @@ class QuizPageCTC extends Component {
     console.log("submit clicked");
     console.log("body while sending is", response);
     var link =
-      "http://localhost:3001/c2c/saveResponse/" +
+      "http://api.xeniamcq.co.in/c2c/saveResponse/" +
       reference.props.match.params.authToken;
     axios
       .post(link, response)
@@ -227,10 +231,7 @@ class QuizPageCTC extends Component {
                   width: "100%",
                 }}
               >
-                <div
-                  
-                  className="question-button-group"
-                >
+                <div className="question-button-group">
                   <button
                     onClick={() => {
                       this.props.selectedQuestionPreviousC2c(
@@ -242,9 +243,7 @@ class QuizPageCTC extends Component {
                     PREVIOUS
                   </button>
                   <button
-                    onClick={() =>
-                      this.submit(this, this.props.questionsC2c)
-                    }
+                    onClick={() => this.submit(this, this.props.questionsC2c)}
                   >
                     SUBMIT
                   </button>

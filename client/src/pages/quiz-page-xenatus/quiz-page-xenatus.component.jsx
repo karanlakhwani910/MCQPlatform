@@ -52,7 +52,10 @@ class QuizPageXenatus extends Component {
   componentDidMount() {
     console.log("this.props is ", this.props);
     console.log("state before setting mounted to true", this.state);
-    window.history.pushState(null, document.title, window.location.href); window.addEventListener('popstate', function (event){ window.history.pushState(null, document.title, window.location.href); });
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener("popstate", function (event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
 
     // if(this.firstTime===false)
     // {
@@ -67,14 +70,14 @@ class QuizPageXenatus extends Component {
     // const nextDate=new Date(2021, 5, 25, 22, 30, 0, 0);
     // console.log("next date is",nextDate.toLocaleString())
     // // console.log("current compared to prev",prevDate<date,nextDate>date);
-    
+
     // if(!(date>prevDate&&date<nextDate))
     // {
     //   this.props.history.push("/")
     // }
     if (this.props.questionsXenatus.length === 0) {
       axios
-        .post("http://localhost:3001/xenatus/fetchQuestions")
+        .post("http://api.xeniamcq.co.in/xenatus/fetchQuestions")
         .then((res) => {
           console.log(res);
           // this.setState(res.data);
@@ -92,7 +95,8 @@ class QuizPageXenatus extends Component {
     }
     console.log(this.props);
     var link =
-      "http://localhost:3001/xenatus/getTime/" + this.props.match.params.authToken;
+      "http://api.xeniamcq.co.in/xenatus/getTime/" +
+      this.props.match.params.authToken;
     console.log(link);
     axios
       .post(link)
@@ -132,7 +136,7 @@ class QuizPageXenatus extends Component {
     console.log("submit clicked");
     console.log("body while sending is", response);
     var link =
-      "http://localhost:3001/xenatus/saveResponse/" +
+      "http://api.xeniamcq.co.in/xenatus/saveResponse/" +
       reference.props.match.params.authToken;
     axios
       .post(link, response)
@@ -230,10 +234,7 @@ class QuizPageXenatus extends Component {
                   width: "100%",
                 }}
               >
-                <div
-                  
-                  className="question-button-group"
-                >
+                <div className="question-button-group">
                   <button
                     onClick={() => {
                       this.props.selectedQuestionPreviousXenatus(
@@ -386,7 +387,8 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(selectedQuestionPreviousXenatus(num));
     }
   },
-  setSelectedQuestionXenatus: (num) => dispatch(setSelectedQuestionXenatus(num)),
+  setSelectedQuestionXenatus: (num) =>
+    dispatch(setSelectedQuestionXenatus(num)),
   setRecentFetchedTime: (time) => dispatch(setRecentFetchedTime(time)),
 });
 

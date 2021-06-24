@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ history }) => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  const eventRef=useRef(null);
+  const eventRef = useRef(null);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   var [severity, setSeverity] = React.useState(""); //success,error,warning,info
@@ -52,7 +52,7 @@ const Login = ({ history }) => {
     // console.log("event ref value is",eventRef.current.value,"eventName is",eventname)
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/${eventname}/login`, {
+      .post(`http://api.xeniamcq.co.in/${eventname}/login`, {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       })
@@ -62,15 +62,14 @@ const Login = ({ history }) => {
           setSeverity("success");
           setMessage(res.data.message);
           handleClick();
-          if(eventname==="couchPotato")
-          {
-            var link= "/"+eventname+"/selection/" + res.data.currentToken + "/";
-          }
-          else{
-            var link = "/"+eventname+"/quiz/" + res.data.currentToken + "/";
+          if (eventname === "couchPotato") {
+            var link =
+              "/" + eventname + "/selection/" + res.data.currentToken + "/";
+          } else {
+            var link = "/" + eventname + "/quiz/" + res.data.currentToken + "/";
           }
           console.log(link);
-         
+
           history.push(link);
         }
         if (res.data.status === "Error") {
@@ -97,7 +96,7 @@ const Login = ({ history }) => {
 
     setOpen(false);
   };
-  
+
   const handleChange = (event) => {
     setEventname(event.target.value);
   };
