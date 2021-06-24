@@ -165,9 +165,9 @@ router.post("/login", async (req, res) => {
     // await user.save();
     const date=new Date();
     console.log("current date is",date);
-    const prevDate=new Date(2021, 5, 24, 23, 45, 00, 0);
+    const prevDate=new Date(2021, 5, 24, 18, 35, 00, 0);
     console.log("prev date is",prevDate)
-    const nextDate=new Date(2021, 5, 24, 23, 50, 00, 0);
+    const nextDate=new Date(2021, 5, 24, 18, 40, 00, 0);
     console.log("current compared to prev",prevDate<date,nextDate<date);
     
     
