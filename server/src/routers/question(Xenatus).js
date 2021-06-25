@@ -277,12 +277,20 @@ router.post("/login", async (req, res) => {
     //   });
     // await user.save();
     //10.00 -10.30
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 25, 16, 30, 00, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 25, 17, 00, 00, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+
     const date=new Date();
     console.log("current date is",date.toLocaleString());
-    const prevDate=new Date(2021, 5, 25, 16, 30, 00, 0);
+    const prevDate=new Date(2021, 5, 25, 5, 00, 00, 0);
     console.log("prev date is",prevDate.toLocaleString())
-    const nextDate=new Date(2021, 5, 25, 17, 00, 00, 0);
+    const nextDate=new Date(2021, 5, 25, 5, 30, 00, 0);
     console.log("next date is",nextDate.toLocaleString())
+
     // console.log("current compared to prev",prevDate<date,nextDate>date);
     
     if(!(date>prevDate&&date<nextDate))
