@@ -266,7 +266,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '21m'
+      expiresIn: '25m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()
