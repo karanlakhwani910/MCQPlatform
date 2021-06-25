@@ -101,7 +101,7 @@ router.post("/fetchQuestions", async (req, res) => {
       else if (randomset===2)
       {
         console.log("in set 3");
-        c2cQuestionSet2.findRandom({}, {}, { limit: 30 }, function (err, results) {
+        c2cQuestionSet3.findRandom({}, {}, { limit: 30 }, function (err, results) {
           if (err) {
             console.log(err);
           } else {
@@ -211,7 +211,7 @@ router.post("/login", async (req, res) => {
     console.log("current date is",date);
     const prevDate=new Date(2021, 5, 25, 5, 00, 00, 0);
     console.log("prev date is",prevDate)
-    const nextDate=new Date(2021, 5, 25, 12, 00, 00, 0);
+    const nextDate=new Date(2021, 5, 25, 15, 00, 00, 0);
     console.log("current compared to prev",prevDate<date,nextDate<date);
     
     
