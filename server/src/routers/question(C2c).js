@@ -98,7 +98,7 @@ router.post("/fetchQuestions", async (req, res) => {
           }
         });
       }
-      else if (randomset===3)
+      else if (randomset===2)
       {
         console.log("in set 3");
         c2cQuestionSet2.findRandom({}, {}, { limit: 30 }, function (err, results) {
