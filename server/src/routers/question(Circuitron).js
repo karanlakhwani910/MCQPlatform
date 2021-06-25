@@ -121,7 +121,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 1800;
+var time = 2400;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {
@@ -163,12 +163,12 @@ router.post("/login", async (req, res) => {
     //     });
     //   });
     // await user.save();
-    //1.30 to 2.00
+    //1.30 to 2.10
     const date=new Date();
     console.log("current date is",date);
     const prevDate=new Date(2021, 5, 25, 8, 00, 00, 0);
     console.log("prev date is",prevDate)
-    const nextDate=new Date(2021, 5, 25, 8, 30, 00, 0);
+    const nextDate=new Date(2021, 5, 25, 8, 40, 00, 0);
     console.log("current compared to prev",prevDate<date,nextDate<date);
     
     
@@ -192,7 +192,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '31m'
+      expiresIn: '41m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()
