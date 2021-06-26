@@ -230,6 +230,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
     res.send({ score });
     await response.save();
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 });
