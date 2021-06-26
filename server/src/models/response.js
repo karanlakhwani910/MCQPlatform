@@ -51,6 +51,7 @@ const responseSchema = new mongoose.Schema(
 const circuitronResponse = mongoose.model("Response", responseSchema);
 const couchPotatoResponse=conn.couchPotato.model("Response",responseSchema);
 const xenatusResponse=conn.xenatus.model("Response",responseSchema);
+const xenatusResponse2=conn.xenatus.model("Response-2",responseSchema);
 const c2cResponse=conn.c2c.model("Response",responseSchema)
 
-module.exports = {couchPotatoResponse,circuitronResponse,xenatusResponse,c2cResponse};
+module.exports = {couchPotatoResponse,circuitronResponse,xenatusResponse,xenatusResponse2,c2cResponse};

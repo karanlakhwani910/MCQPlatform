@@ -5,8 +5,8 @@ const jwt=require("jsonwebtoken")
 
 const auth = require("../middleware/auth");
 const {xenatusLogicalQuestion,xenatusBloodRelationQuestion,xenatusNumericalQuestion,xenatusDiagramaticQuestion,xenatusQuantitiveQuestion,xenatusLogicalQuestion2,xenatusBloodRelationQuestion2,xenatusNumericalQuestion2,xenatusDiagramaticQuestion2,xenatusQuantitiveQuestion2} = require("../models/question");
-const {xenatusResponse} = require("../models/response");
-const {xenatusMainSiteUser} = require("../models/main-site-user");
+const {xenatusResponse,xenatusResponse2} = require("../models/response");
+const {xenatusMainSiteUser,xenatusMainSiteUser2} = require("../models/main-site-user");
 
 const router = new express.Router();
 
@@ -58,78 +58,8 @@ const router = new express.Router();
 //to fetch questions
 
 router.post("/fetchQuestions", async (req, res) => {
-  try {
-    xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
-      if (err) {
-        console.log(err);
-      } else {
-        var newresults=results.map((question)=>{
-            question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                        return question;
-        })
-        console.log("value of new results is",newresults)
-        xenatusNumericalQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
-          if (err) {
-            console.log(err);
-          } else {
-            var newresults2=results.map((question)=>{
-                question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                            return question;
-            })
-            console.log("value of new results is",newresults2)
-            var finalarray=newresults.concat(newresults2);
-            xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
-              if (err) {
-                console.log(err);
-              } else {
-                var newresults3=results.map((question)=>{
-                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                                return question;
-                })
-                console.log("value of new results is",newresults3)
-                var finalarray2=finalarray.concat(newresults3);
-                xenatusDiagramaticQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    var newresults4=results.map((question)=>{
-                        question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                                    return question;
-                    })
-                    console.log("value of new results is",newresults4)
-                    var finalarray3=finalarray2.concat(newresults4)
-                    xenatusLogicalQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
-                      if (err) {
-                        console.log(err);
-                      } else {
-                        var newresults5=results.map((question)=>{
-                            question.correctAnswer=((question.correctAnswer+5)**7)%33;
-                                        return question;
-                        })
-                        console.log("value of new results is",newresults5)
-                        var finalarray4=finalarray3.concat(newresults5)
-                // console.log("after adding value of new results",newresults,newresults2)
-                        res.status(200).send(finalarray4);
-                      }
-                    })
-                  }
-                })
-              }
-          
-    
-            })
-          }
-
-        })
-        
-      }
-
-    });
-    
-  }
-  //ROUND 2
   // try {
-  //   xenatusBloodRelationQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+  //   xenatusBloodRelationQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
   //     if (err) {
   //       console.log(err);
   //     } else {
@@ -138,7 +68,7 @@ router.post("/fetchQuestions", async (req, res) => {
   //                       return question;
   //       })
   //       console.log("value of new results is",newresults)
-  //       xenatusNumericalQuestion2.findRandom({}, {}, { limit: 7 }, function (err, results) {
+  //       xenatusNumericalQuestion.findRandom({}, {}, { limit: 7 }, function (err, results) {
   //         if (err) {
   //           console.log(err);
   //         } else {
@@ -148,7 +78,7 @@ router.post("/fetchQuestions", async (req, res) => {
   //           })
   //           console.log("value of new results is",newresults2)
   //           var finalarray=newresults.concat(newresults2);
-  //           xenatusQuantitiveQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+  //           xenatusQuantitiveQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
   //             if (err) {
   //               console.log(err);
   //             } else {
@@ -158,7 +88,7 @@ router.post("/fetchQuestions", async (req, res) => {
   //               })
   //               console.log("value of new results is",newresults3)
   //               var finalarray2=finalarray.concat(newresults3);
-  //               xenatusDiagramaticQuestion2.findRandom({}, {}, { limit: 5 }, function (err, results) {
+  //               xenatusDiagramaticQuestion.findRandom({}, {}, { limit: 5 }, function (err, results) {
   //                 if (err) {
   //                   console.log(err);
   //                 } else {
@@ -168,7 +98,7 @@ router.post("/fetchQuestions", async (req, res) => {
   //                   })
   //                   console.log("value of new results is",newresults4)
   //                   var finalarray3=finalarray2.concat(newresults4)
-  //                   xenatusLogicalQuestion2.findRandom({}, {}, { limit: 8 }, function (err, results) {
+  //                   xenatusLogicalQuestion.findRandom({}, {}, { limit: 8 }, function (err, results) {
   //                     if (err) {
   //                       console.log(err);
   //                     } else {
@@ -197,6 +127,76 @@ router.post("/fetchQuestions", async (req, res) => {
   //   });
     
   // }
+  //ROUND 2
+  try {
+    xenatusBloodRelationQuestion2.findRandom({}, {}, { limit: 6 }, function (err, results) {
+      if (err) {
+        console.log(err);
+      } else {
+        var newresults=results.map((question)=>{
+            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                        return question;
+        })
+        console.log("value of new results is",newresults)
+        xenatusNumericalQuestion2.findRandom({}, {}, { limit: 6 }, function (err, results) {
+          if (err) {
+            console.log(err);
+          } else {
+            var newresults2=results.map((question)=>{
+                question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                            return question;
+            })
+            console.log("value of new results is",newresults2)
+            var finalarray=newresults.concat(newresults2);
+            xenatusQuantitiveQuestion2.findRandom({}, {}, { limit: 6 }, function (err, results) {
+              if (err) {
+                console.log(err);
+              } else {
+                var newresults3=results.map((question)=>{
+                    question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                return question;
+                })
+                console.log("value of new results is",newresults3)
+                var finalarray2=finalarray.concat(newresults3);
+                xenatusDiagramaticQuestion2.findRandom({}, {}, { limit: 6 }, function (err, results) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    var newresults4=results.map((question)=>{
+                        question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                    return question;
+                    })
+                    console.log("value of new results is",newresults4)
+                    var finalarray3=finalarray2.concat(newresults4)
+                    xenatusLogicalQuestion2.findRandom({}, {}, { limit: 6 }, function (err, results) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        var newresults5=results.map((question)=>{
+                            question.correctAnswer=((question.correctAnswer+5)**7)%33;
+                                        return question;
+                        })
+                        console.log("value of new results is",newresults5)
+                        var finalarray4=finalarray3.concat(newresults5)
+                // console.log("after adding value of new results",newresults,newresults2)
+                        res.status(200).send(finalarray4);
+                      }
+                    })
+                  }
+                })
+              }
+          
+    
+            })
+          }
+
+        })
+        
+      }
+
+    });
+    
+  }
   catch (e) {
     res.status(400).send(e);
   }
@@ -220,8 +220,8 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
         }
       }
     });
-    const response = new xenatusResponse({ questions: req.body, owner: req._id });
-    const user = await xenatusMainSiteUser.findOneAndUpdate(
+    const response = new xenatusResponse2({ questions: req.body, owner: req._id });
+    const user = await xenatusMainSiteUser2.findOneAndUpdate(
       { _id: req._id },
       { $set: { score, correctAnswers, incorrectAnswers } }
     );
@@ -234,7 +234,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 2400;
+var time = 1920;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {
@@ -276,12 +276,19 @@ router.post("/login", async (req, res) => {
     //     });
     //   });
     // await user.save();
-    //10.00 -10.30
+    //10.30 -11.00
+    // const date=new Date();
+    // console.log("current date is",date.toLocaleString());
+    // const prevDate=new Date(2021, 5, 26, 17, 00, 00, 0);
+    // console.log("prev date is",prevDate.toLocaleString())
+    // const nextDate=new Date(2021, 5, 26, 17, 35, 00, 0);
+    // console.log("next date is",nextDate.toLocaleString())
+
     const date=new Date();
     console.log("current date is",date.toLocaleString());
-    const prevDate=new Date(2021, 5, 25, 16, 30, 00, 0);
+    const prevDate=new Date(2021, 5, 26, 13, 45, 00, 0);
     console.log("prev date is",prevDate.toLocaleString())
-    const nextDate=new Date(2021, 5, 25, 17, 10, 00, 0);
+    const nextDate=new Date(2021, 5, 26, 14, 15, 00, 0);
     console.log("next date is",nextDate.toLocaleString())
 
 
@@ -296,7 +303,7 @@ router.post("/login", async (req, res) => {
     else{
     // const user=await circuitronUser.findOne({username:req.body.username})
 
-    const user=await xenatusMainSiteUser.findOne({email:req.body.username})
+    const user=await xenatusMainSiteUser2.findOne({email:req.body.username})
 
     console.log(user);
     if(!user){
@@ -309,7 +316,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '45m'
+      expiresIn: '35m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()
