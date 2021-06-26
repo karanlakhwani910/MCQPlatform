@@ -207,6 +207,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   try {
     console.log("in endpoint for xenatus")
     const responsesArrray = req.body;
+    console.log(req.body)
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var score = 0;
