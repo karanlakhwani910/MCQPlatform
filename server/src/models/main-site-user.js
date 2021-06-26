@@ -82,7 +82,7 @@ const MainSiteUserSchema = new mongoose.Schema(
 const circuitronMainSiteUser = mongoose.model("main-site-user", MainSiteUserSchema);
 const couchPotatoMainSiteUser=conn.couchPotato.model("main-site-user",MainSiteUserSchema);
 const xenatusMainSiteUser=conn.xenatus.model("main-site-user",MainSiteUserSchema);
-const xenatusMainSiteUser2=conn.xenatus.model("main-site-user-2",MainSiteUserSchema);
+const xenatusMainSiteUser2=conn.xenatus.model("main-site-users-2",MainSiteUserSchema);
 const c2cMainSiteUser=conn.c2c.model("main-site-user",MainSiteUserSchema);
 
 module.exports = {couchPotatoMainSiteUser,circuitronMainSiteUser,xenatusMainSiteUser,xenatusMainSiteUser2,c2cMainSiteUser}
