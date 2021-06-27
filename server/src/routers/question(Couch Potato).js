@@ -60,7 +60,7 @@ const router = new express.Router();
 router.post("/fetchQuestions", async (req, res) => {
   try {
     console.log("inside end point",req.body.selectedSeries)
-    couchPotatoGOTQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+    couchPotatoGOTQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
       if (err) {
         console.log(err);
       } else {
@@ -73,7 +73,7 @@ router.post("/fetchQuestions", async (req, res) => {
         }
         else{var newresults=[]}
         console.log("value of new results is",newresults)
-        couchPotatoBBTQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+        couchPotatoBBTQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
           if (err) {
             console.log(err);
           } else {
@@ -86,7 +86,7 @@ router.post("/fetchQuestions", async (req, res) => {
             else{var newresults2=[]}
             console.log("value of new results is",newresults2)
             var finalarray=newresults.concat(newresults2);
-            couchPotatoHPQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+            couchPotatoHPQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
               if (err) {
                 console.log(err);
               } else {
@@ -99,7 +99,7 @@ router.post("/fetchQuestions", async (req, res) => {
                 else{var newresults3=[]}
                 console.log("value of new results is",newresults3)
                 var finalarray2=finalarray.concat(newresults3);
-                couchPotatoKFQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+                couchPotatoKFQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
                   if (err) {
                     console.log(err);
                   } else {
@@ -112,7 +112,7 @@ router.post("/fetchQuestions", async (req, res) => {
                     else{var newresults4=[]} 
                     console.log("value of new results is",newresults4)
                     var finalarray3=finalarray2.concat(newresults4)
-                    couchPotatoNarutoQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+                    couchPotatoNarutoQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
                       if (err) {
                         console.log(err);
                       } else {
@@ -125,7 +125,7 @@ router.post("/fetchQuestions", async (req, res) => {
                         else{var newresults5=[]}
                         console.log("value of new results is",newresults5)
                         var finalarray4=finalarray3.concat(newresults5)
-                        couchPotatoSuitsQuestion.findRandom({}, {}, { limit: 20 }, function (err, results) {
+                        couchPotatoSuitsQuestion.findRandom({}, {}, { limit: 10 }, function (err, results) {
                           if (err) {
                             console.log(err);
                           } else {
@@ -194,7 +194,7 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
   }
 });
 
-var time = 1200;
+var time = 900;
 var task;
 
 router.post("/getTime/:authToken", auth, async (req, res) => {
@@ -236,19 +236,14 @@ router.post("/login", async (req, res) => {
     //     });
     //   });
     // await user.save();
-    //12.30-12.50
-    // const date=new Date();
-    // console.log("current date is",date);
-    // const prevDate=new Date(2021, 5, 25, 7, 00, 00, 0);
-    // console.log("prev date is",prevDate)
-    // const nextDate=new Date(2021, 5, 25, 7, 20, 00, 0);
-    // console.log("current compared to prev",prevDate<date,nextDate<date);
+    //10.00-10.15
     const date=new Date();
     console.log("current date is",date);
-    const prevDate=new Date(2021, 5, 25, 11, 30, 00, 0);
+    const prevDate=new Date(2021, 5, 25, 16, 30, 00, 0);
     console.log("prev date is",prevDate)
-    const nextDate=new Date(2021, 5, 25, 12, 00, 00, 0);
+    const nextDate=new Date(2021, 5, 25, 16, 45, 00, 0);
     console.log("current compared to prev",prevDate<date,nextDate<date);
+    
 
     
     if(!(date>prevDate&&date<nextDate))
@@ -272,7 +267,7 @@ router.post("/login", async (req, res) => {
         throw new Error("Unable to login")
     }
     const token=jwt.sign({_id:user._id.toString()},"mcqPlatform",{
-      expiresIn: '25m'
+      expiresIn: '20m'
    })
     user.tokens=user.tokens.concat({token})
     await user.save()

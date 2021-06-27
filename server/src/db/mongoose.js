@@ -7,17 +7,17 @@ mongoose.connect("mongodb+srv://couch_potato_user:couch_potato_user@couch-potato
     useFindAndModify:false
 })
 
-mongoose.couchPotato=mongoose.createConnection("mongodb+srv://couch_user_real:couch_user_real@couch-potato.dctjw.mongodb.net/Round-1",{ //process.env.MONGODB_URL
+mongoose.couchPotato=mongoose.createConnection("mongodb+srv://couch_user_real:couch_user_real@couch-potato.dctjw.mongodb.net/Round-2",{ //process.env.MONGODB_URL
 useNewUrlParser:true,
 useCreateIndex:true,
 useFindAndModify:false
 })
 
-mongoose.couchPotato2=mongoose.createConnection("mongodb+srv://couch_user_real:couch_user_real@couch-potato.dctjw.mongodb.net/Round-2",{ //process.env.MONGODB_URL
-useNewUrlParser:true,
-useCreateIndex:true,
-useFindAndModify:false
-})
+// mongoose.couchPotato2=mongoose.createConnection("mongodb+srv://couch_user_real:couch_user_real@couch-potato.dctjw.mongodb.net/Round-2",{ //process.env.MONGODB_URL
+// useNewUrlParser:true,
+// useCreateIndex:true,
+// useFindAndModify:false
+// })
 
 
 mongoose.xenatus=mongoose.createConnection("mongodb+srv://xenatus_user:xenatus_user@xe-natus.0yjzp.mongodb.net/Xenatus",{ //process.env.MONGODB_URL
