@@ -172,9 +172,10 @@ router.post("/saveResponse/:authToken", auth, async (req, res) => {
     responsesArrray.map((question) => {
       if (question.marked === true) {
         if (parseInt(question.selectedAnswer) === (((question.correctAnswer**3)%33)-5)) {
-          score += question.pointsForQuestion;
+          score += question.pointsForQuestion*4;
           correctAnswers++;
         } else {
+          score -= question.pointsForQuestion;
           incorrectAnswers++;
         }
       }
